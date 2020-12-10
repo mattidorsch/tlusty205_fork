@@ -9,10 +9,10 @@ C
 C *********************************************************
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
 C
       OPEN(UNIT=91,STATUS='SCRATCH',FORM='UNFORMATTED')
       OPEN(UNIT=92,STATUS='SCRATCH',FORM='UNFORMATTED')
@@ -72,9 +72,9 @@ C     ==========
 C
 C     Hydrogenic oscillator strentghs
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
 C
       DATA ((OSH(I,J),I=1,20),J=1,16)/20*0.,
      * 0.4162,19*0.,7.910D-2,0.6407,18*0.,2.899D-2,0.1193,
@@ -118,8 +118,8 @@ C     ================
 C
 C     General input and initialization procedure
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       common/hediff/ hcmass,radstr
 C
       read(1,*,end=10,err=10) idisk
@@ -141,13 +141,13 @@ C     =================
 C
 C     driver for input and initializations - "new" routine
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (T15=1.D-15)
       parameter (xcon=8.0935d-21)
       CHARACTER*20 FINSTD
@@ -945,13 +945,13 @@ C
       SUBROUTINE RDATA(ION)
 C     =====================
 C 
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/STRPAR/IMER,ITR,IC,IL,IP,NLASTE,NHOD,LASV
       COMMON/INUNIT/IUNIT
       PARAMETER (T15=1.D-15)
@@ -1444,13 +1444,13 @@ C
 C     setting up the default values of various input flags, and
 C     input of non-standard values of various input flags and parameters
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/FLXAUX/T4,PGAS,PRAD,PGM,PRADM,ITGMAX,ITGMX0
       common/freqcl/frmin,frmax,nfrecl
       common/quasun/tqmprf,iquasi,nunalp,nunbet,nungam,nunbal
@@ -1779,13 +1779,13 @@ C     =================
 C
 C     Diagnostic print of the input flags and parameters
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
 C
       if(lchc) ichc=1
       write(6,602)
@@ -1910,7 +1910,7 @@ C  FROM THE START
 C
 C  TAKEN FROM MULTI - M. CARLSSON (1976)
 C
-C     INCLUDE 'IMPLIC.FOR'
+C     INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (MSEPAR=7)
       CHARACTER*(*) TEXT
       CHARACTER SEPAR(MSEPAR)
@@ -1989,10 +1989,10 @@ C        QREF - total charge due to the reference species
 C        DQTR - derivative of QREF wrt temperature
 C        DQNR - derivative of QREF wrt electron density
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       CHARACTER*4 TYPAT,DYP
       COMMON/PFSTDS/PFSTD(99,30),MODPF(matom)
       DIMENSION TYPAT(matom),ABND(matom),D(3,matom),
@@ -2740,10 +2740,10 @@ C
 C     If INTRPL > 0, there is an additional input from unit 8, namely
 C     new depth scale DM, the one which will be used in the present run
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (MINPUT=MLEVEL+5,
      *           MDEPTI=MDEPTH)
       COMMON POPUL0(MLEVEL,MDEPTI),ESEMAT(MLEVEL,MLEVEL),BESE(MLEVEL),
@@ -2900,10 +2900,10 @@ C
 C     Read an initial model atmosphere from unit 8
 C      in Kurucz ATLAS' format
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (MINPUT=7)
       CHARACTER KUR*15
       DIMENSION KKFIX0(MLEVEL)
@@ -3002,10 +3002,10 @@ C
 C     Read an initial model atmosphere from unit 8
 C      in Cloudy's format as provided by Katya Verner
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (MINPUT=6)
       DIMENSION RS(MDEPTH),KKFIX0(MLEVEL)
       COMMON POPUL0(MLEVEL,MDEPTH),ESEMAT(MLEVEL,MLEVEL),BESE(MLEVEL),
@@ -3136,10 +3136,10 @@ C      NXTSIO  -  see above
 C      REL     -  population multiplier - see above
 C                 if REL=0, the program sets up REL=1
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       character*20 fnstd
       dimension n0old(30,30),n1old(30,30)
       dimension katold(2,30),vtbold(mdepth)
@@ -3373,13 +3373,13 @@ C
 C     Control procedure for the formal solution, i.e. all calculations
 C     between two consecutive iterations of complete linearization
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       common/icnrsp/iconrs
       DIMENSION PGR(MLVEXP)
 C
@@ -3618,12 +3618,12 @@ C
 C     Auxiliary procedure for RESOLV
 C     initialization of model parameters for further use in RESOLV
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION COL(MTRANS),DENS0(MDEPTH),SBW(MLEVEL),XE(MDEPTH),
      *          ANTC(MDEPTH)
       DIMENSION GRD(MDEPTH),pra(mdepth),pgs0(mdepth)
@@ -3948,10 +3948,10 @@ c     =================
 c
 c     routine for finding and removing oscillations in the temperature
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR' 
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR' 
       dimension delt(mdepth),dda(mdepth)
 
 c  
@@ -4018,12 +4018,12 @@ C     =====================
 C
 C     Rosseland mean opacity
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
 c      DIMENSION TAUR(MDEPTH)
       dimension pld(mdepth),abpld(mdepth)
 
@@ -4163,11 +4163,11 @@ C
       SUBROUTINE NEWPOP(ID,POP1)
 C     ==========================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION POP1(MLEVEL),DPOP(MLEVEL),DPMAX(MDEPTH),
      *          SBW(MLEVEL)
 c
@@ -4224,10 +4224,10 @@ C     SWPFAC  - initial CRSW = SWPFAC * min(collis.rate/rad.rate)
 C     SWPLIM  - has the meaning: if CRSW > SWPLIM, then CRSW = 1
 C     SWPINC  - CRSW(actual) = CRSW(previous) * SWPINC
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION SWTCH(MDEPTH)
 C
       IF(ICRSW.EQ.0) RETURN
@@ -4307,10 +4307,10 @@ C     wrt. temperature (T) and electron density (DUSUMN)
 C
 C     Input: ID  - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (UH=1.5)
       PARAMETER (CMAX=2.154D4,CCON=2.0706D-16)
 C
@@ -4464,12 +4464,12 @@ C             EMIS1 -  array of emission coefficient
 C             SCAT1 -  array of scattering coefficient (all scattering
 C                       mechanisms except electron scattering)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       common/hmolab/anh2(mdepth),anhm(mdepth)
       common/ipricr/iprcrs,nprcrs
       PARAMETER (C14=2.99793D14, c10=c14*1.d-4,CFF1=1.3727D-25)
@@ -4809,11 +4809,11 @@ C
       SUBROUTINE LEVSOL(A,B,POPP,IICAL,NLVCAL,IALL)
 C     =============================================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION A(MLEVEL,MLEVEL),B(MLEVEL),POPP(MLEVEL),
      *          AP(MLEVEL,MLEVEL),BP(MLEVEL),POPP1(MLEVEL),
      *          IICAL(MLEVEL)
@@ -4868,11 +4868,11 @@ C
       SUBROUTINE STEQEQ(ID,POP1,MODE)
 C     ===============================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/POPSTR/POPP(MLEVEL),
      *       POPP1(MLEVEL),POPP2(MLEVEL),POPP3(MLEVEL)  
       COMMON/PPAPAR/IPOPST(MATOM),NTERST,ITERST,
@@ -4986,10 +4986,10 @@ C     driving routine for super-zeroing, i.e. detecting that
 C     a given population is small throughout the whole
 C     atmosphere, so it is removed completely from linearization
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION POPMA(MLEVEL),INDLEZ(MLEVEL),GZR(MLEVEL)
 c
       if(ioptab.lt.0) return
@@ -5110,10 +5110,10 @@ C
 C     Output: A - rate matrix
 C             B - the right-hand-side vector
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION A(MLEVEL,MLEVEL),B(MLEVEL)
       DIMENSION AIJ(MTRANS),AJI(MTRANS)
       DIMENSION SBW(MLEVEL),IICAL(MLEVEL)
@@ -5404,10 +5404,10 @@ C     conservation equation is not part of the rate matrix
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C     DIMENSION AJ(MLEVEL)
 c
       if(ioptab.lt.0) return
@@ -5493,11 +5493,11 @@ C     determination of the global reference level, and
 C     determination of the LTE reference levels and corresponding
 C     quantities
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION XSBF(MLEVEL)
       if(ioptab.lt.0) return
 C
@@ -5783,11 +5783,11 @@ C                   = 1 - input populations are given by the last
 C                         formal parameter POP
 C             POP   - array of input populations (for IMODE=1 only)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION POPP(MLEVEL),IICAL(MLEVEL)
       if(ioptab.lt.0) return
 C
@@ -5870,13 +5870,13 @@ C                         the exact downward rate is given by:
 C               lines   : RRD * stat.weight(lower)/stat.weight(upper)
 C               continua: RRD * n(elec) * Saha-Boltzmann factor
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION RBNE(MDEPTH)
 C     DIMENSION EHKL(MFREQL)
 C
@@ -6052,14 +6052,14 @@ C     =================
 C
 C     Evaluation of "preconditioned" radiative rates
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       PARAMETER(PGRD=4.1916825D-10)
       DIMENSION EHK(MDEPTH)
 C     DIMENSION EHKL(MFREQL)
@@ -6308,13 +6308,13 @@ C
 C     Evaluation of "preconditioned" radiative rates
 C     variant for 3-diagonal operator 
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION EHK(MDEPTH),ALABM(MDEPTH),ALABP(MDEPTH)
 C
 C     zero the rates
@@ -6676,13 +6676,13 @@ C     Evaluation of all nexcessary ALI parameters + radiative rates
 C     (the routine is analogous to RATES1)
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION EXX(MDEPTH),RBNU(MDEPTH),RBNUF(MDEPTH)
 C     DIMENSION EHKL(MFREQL),EHKLF(MFREQL)
 C
@@ -6936,14 +6936,14 @@ C     (the routine is analogous to RATES1)
 C     a variant for derivatives of the rate matrix w.r.t. populations
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION EXX(MDEPTH),RBNU(MDEPTH),RBNUF(MDEPTH)
 C     DIMENSION EHKL(MFREQL),EHKLF(MFREQL)
 C
@@ -7731,13 +7731,13 @@ C     a variant for derivatives of the rate matrix w.r.t. populations;
 C     annd for tridiagonal operator
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION EXX(MDEPTH),RBNU(MDEPTH),RBNUF(MDEPTH)
 C     DIMENSION EHKL(MFREQL),EHKLF(MFREQL)
       if(ioptab.lt.0) return
@@ -8233,14 +8233,14 @@ C     Simplified routine ALIST1 for Kantorovich iteration
 C
 C     Evaluation of all nexcessary ALI parameters + radiative rates
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION RBNU(MDEPTH)
 C     DIMENSION EHKL(MFREQL)
 C
@@ -8403,14 +8403,14 @@ C     Evaluation of all nexcessary ALI parameters + radiative rates
 C     (the routine is analogous to RATES)
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION RBNU(MDEPTH)
 C     DIMENSION EHKL(MFREQL)
 C
@@ -8642,10 +8642,10 @@ C                             > 0  - scaled classical expression
 C
 C      the corresponding index IP is given by ITRA(IUP(ITR),ILOW(ITR))
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (BOL2=2.76108D-16, CIN=UN/2.997925D10)
 C
       J=IUP(ITR)
@@ -8714,8 +8714,8 @@ C
 C     Non-standard expression for the damping parameter  -
 C     a user-supplied procedure
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       AGAM=0.
       if(itr.le.0) return
       t1=t
@@ -8753,10 +8753,10 @@ C
 C     V - frequency displacement from the line center in units of
 C         Doppler width
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/quasun/tqmprf,iquasi,nunalp,nunbet,nungam,nunbal
       PARAMETER (PISQ=1.77245385090551D0,PISQ1=UN/PISQ)
 C
@@ -8813,7 +8813,7 @@ C
 C     Voigt function
 C     Procedure after Matta and Reichel, 1971, Math.Comp. 25, 339.
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION HN(12),EN(12)
       PARAMETER (PI=3.141592653589793D0, M=12, HH=0.5D0, UN=1.D0)
       PARAMETER (PISQ=1.77245385090551D0,PISQ1=UN/PISQ)
@@ -8881,7 +8881,7 @@ c  computes a voigt function  h = h(a,v)
 c  a=gamma/(4*pi*dnud)   and  v=(nu-nu0)/dnud.  this  is  done after
 c  traving (landolt-b\rnstein, p. 449).
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       real*4 vs,a
       PARAMETER (UN=1., TWO=2.)
       dimension ak(19),a1(5)
@@ -8984,10 +8984,10 @@ C     DOP - Doppler width
 C     ITR - transition index
 C     ID  - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       PROFSP=0.
       IP=IPROF(ITR)
@@ -9075,7 +9075,7 @@ C ***
 C *** Interpolation of function U(beta) in table from Dien (ApJ 109,452)
 C ***                                                                   
 C **********************************************************************
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 C                                                                        
       DIMENSION B0(46),U0(46)                                           
 C
@@ -9115,7 +9115,7 @@ C
 C ***                                                                   
 C *** Lagrange interpolation for three points                           
 C ***
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 C                                                                        
       XL0=(X-X1)*(X-X2)/(X0-X1)/(X0-X2)                                 
       XL1=(X-X0)*(X-X2)/(X1-X0)/(X1-X2)                                 
@@ -9169,10 +9169,10 @@ C                for frequency points between IFR0(ITR) and IFR1(ITR).
 C      W      -  corresponding integration weights
 C      PROF   -  corresponding values of absorption profile
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (BOL2=2.76108D-16, CIN=UN/2.997925D10, OS0=0.02654,
      *           F0C1=1.25D-9, TTW=2./3., PISQ1=UN/1.77245385090551D0,
      *           C18IN=UN/CAS,F0C2=3.906D-11)
@@ -9423,10 +9423,10 @@ C
 C     Output (to COMMON/FRQEXP)
 C      PROF   -  values of absorption profile
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (OS0=0.02654)
 C
       IJ0=IFR0(ITR)
@@ -9472,11 +9472,11 @@ C     Input:  ITR    - index of transition
 C             ID     - depth index
 C     Output: PRF    - array of absorption profile
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       common/quasun/tqmprf,iquasi,nunalp,nunbet,nungam,nunbal
       PARAMETER (BOL2=2.76108D-16, CIN=UN/2.997925D10, OS0=0.02654,
      *           F0C1=1.25D-9, TTW=2./3., PISQ1=UN/1.77245385090551D0,
@@ -9691,9 +9691,9 @@ C            MODE-  =0 - cross-section equal to zero longward of edge
 C                   >0 - cross-section non-zero (extrapolated) longward
 C                        of edge
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       PARAMETER (SIH0=2.815D29, E10=2.3025851)
       DIMENSION XFIT(MFIT) , ! local array containing x     for OP data
      +          SFIT(MFIT)   ! local array containing sigma for OP data
@@ -9878,9 +9878,9 @@ C          No test on threshold energy as given by Verner et al.
 C          to avoid inconsistencies with limits FR0 as read by Tlusty
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
 C
       PARAMETER (HHEV=H/1.6022D-12,T18=1.D-18,MVER=105)
       DIMENSION S0(MVER),E0(MVER),EMX(MVER)
@@ -10115,8 +10115,8 @@ C       of all Fe ions.
 C           Verner D.A. et al. 1996, ApJ 465
 C           Verner & Yakovlev 1995, A&AS 109, 125
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       PARAMETER (T18=1.D-18,MVER=26)
       DIMENSION S0(MVER),E0(MVER),EMX(MVER)
       DIMENSION Y0(MVER),Y1(MVER),YW(MVER),YA(MVER),PV(MVER)
@@ -10214,8 +10214,8 @@ C       of all Sulfur ions.
 C           Verner D.A. et al. 1996, ApJ 465
 C           Verner & Yakovlev 1995, A&AS 109, 125
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       PARAMETER (T18=1.D-18,MVER=16)
       DIMENSION S0(MVER),E0(MVER),EMX(MVER)
       DIMENSION Y0(MVER),Y1(MVER),YW(MVER),YA(MVER),PV(MVER)
@@ -10293,8 +10293,8 @@ C       of all Argon ions.
 C           Verner D.A. et al. 1996, ApJ 465
 C           Verner & Yakovlev 1995, A&AS 109, 125
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       PARAMETER (T18=1.D-18,MVER=18)
       DIMENSION S0(MVER),E0(MVER),EMX(MVER)
       DIMENSION Y0(MVER),Y1(MVER),YW(MVER),YA(MVER),PV(MVER)
@@ -10375,8 +10375,8 @@ C       of all Calcium ions.
 C           Verner D.A. et al. 1996, ApJ 465
 C           Verner & Yakovlev 1995, A&AS 109, 125
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       PARAMETER (T18=1.D-18,MVER=20)
       DIMENSION S0(MVER),E0(MVER),EMX(MVER)
       DIMENSION Y0(MVER),Y1(MVER),YW(MVER),YA(MVER),PV(MVER)
@@ -10464,7 +10464,7 @@ C
 C     Hydrogenic bound-free Gaunt factor for the principal quantum
 C     number I and frequency FR
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (UN=1.)
       DIMENSION CGT(7,10),X(7),FRKW(10)
       DATA CGT/0.,12.803223,-5.5759888,1.2302628,-2.9094219D-3,
@@ -10519,7 +10519,7 @@ C
 C     Hydrogenic bound-free Gaunt factor for the principal quantum
 C     number I and frequency FR (from Klaus Werner)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       GNTK=1.
       IF(I.GT.3) GO TO 16
       Y=1./FR      
@@ -10542,7 +10542,7 @@ C
 C     Non-standard evaluation of the photoionization cross-sections
 C     Basically user-suppled procedure; here are some examples
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       SIGSP=0.
 C
 C     Special formula for the He I ground state
@@ -10586,7 +10586,7 @@ C     at the frequency FR.
 C
 C     (At the moment, only a few transitions are considered)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION WL1(20),WL2(20),WL(20),SIG0(20,24),SIGS(20)
 C
       DATA WL1 /
@@ -10672,7 +10672,7 @@ C     at the frequency FR.
 C
 C     (At the moment, only a few transitions are considered)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION HEV(30),F0(30),SIG0(30,2),SIGS(30)
 C
       DATA HEV /
@@ -10740,7 +10740,7 @@ C
 C     Photoionization cross-section for neutral carbon 2p1D and 2p1S
 C     levels (G.B.Taylor - private communication)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION FR2(34),SG2(34),FR3(45),SG3(45)
       PARAMETER (FR0=3.28805D15, NC2=34, NC3=45)
       DATA FR2/ 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.80, 0.81, 0.82,
@@ -10798,7 +10798,7 @@ C
 C     Special formula for the photoionization cross-section from the
 C     averaged <n=2> level of He I
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (C1=3.D0,C2=9.D0,C3=1.6D1,T15=1.D-15,
      * A1=6.45105D-18,A2=3.02D-19,A3=9.9847D-18,A4=1.1763673D-17,
      * A5=3.63662D-19,A6=-2.783D2,A7=1.488D1,A8=-2.311D-1,
@@ -10850,9 +10850,9 @@ C            = 13 or 23  -  the given transition is from non-averaged
 C                           triplet state
 C      FR    - frequency
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
 C
       NI=NQUANT(II)
       IGI=INT(G(II)+0.01)
@@ -11005,7 +11005,7 @@ C                FREQ = FREQUENCY
 C
 C           DGH JUNE 1988 JILA, slightly modified by I.H.
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       INTEGER S,L,SS,LL
       PARAMETER (TENM18=1.D-18, FRH=3.28805D15, TWO=2.D0,
      *           TENLG=2.302585093, PHOT0=2.815D29)
@@ -11165,8 +11165,8 @@ C                N = PRINCIPAL QUANTUM NUMBER
 C                FREQ = FREQUENCY
 C                GG  = STATISTICAL WEIGHT
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       INTEGER S,L,SS,LL
       PARAMETER (PHOT0=2.815D29)
       DIMENSION COEF(3,11),IST(3)
@@ -11224,7 +11224,7 @@ C     level I of ion KI. Threshold cross-sections will be of the order
 C     of the numerical value of 10^-18.
 C     Opacity-Project (OP) interpolation fit formula
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER    (E10=2.3025851)
       PARAMETER    (MMAXOP = 200,! maximum number of levels in OP data
      +              MOP    =  15 )! maximum number of fit points per level
@@ -11285,7 +11285,7 @@ C        NOP()     = number of fit points for current level
 C        XOP(,)    = x     = alog10(nu/nu0)       of fit point
 C        SOP(,)    = sigma = alog10(sigma/10^-18) of fit point 
 C      
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER    (MMAXOP = 200,! maximum number of levels in OP data
      +              MOP    =  15 )! maximum number of fit points per level
       CHARACTER*10  IDLVOP(MMAXOP) ! level identifyer Opacity-Project data
@@ -11349,7 +11349,7 @@ C
 C     linear interpolation routine. Determines YINT = Y(XINT) from 
 C     grid Y(X) with N points and dimension NTOT. 
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION X(NTOT),Y(NTOT)
 C
 C     bisection (see Numerical Recipes par 3.4 page 90)
@@ -11385,9 +11385,9 @@ C     =====================
 C
 C     depth-dependent quantities for the hydrogenic free-free Gaunt factor
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (THET0=5.0404D3,
      *           THET1=UN/THET0,
      *           A0=1.0823d0,
@@ -11454,9 +11454,9 @@ C
 C     Hydrogenic free-free Gaunt factor, for depth ID,
 C     frequency FR, and charge CH
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (XMIN=0.2D0,
      *           XMINI=UN/XMIN)
 C
@@ -11481,9 +11481,9 @@ C
 C     Hydrogenic free-free Gaunt factor (GFR) and its derivative (GFRD)
 C     for depth ID, frequency FR, and charge CH
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (C14=2.997925D14,
      *           XMIN=0.2D0,
      *           XMINI=UN/XMIN)
@@ -11513,7 +11513,7 @@ C
 C     Non-standard evaluation of free-free cross section;
 C     a user supplied procedure
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       FFCROS=0.
       if(iel.eq.0.or.ifr.eq.0) return
       t1=t
@@ -11531,7 +11531,7 @@ C     ===================
 C
 C     Bound-free cross-section for H- (negative hydrogen ion)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (UN=1.D0)
       SBFHMI_old=0.
       FR0=1.8259D14
@@ -11561,7 +11561,7 @@ C     Taken from Kurucz ATLAS9
 C
 C     FROM MATHISEN (1984), AFTER WISHART(1979) AND BROAD AND REINHARDT (1976)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION WBF(85),BF(85)
       DATA WBF/  18.00,  19.60,  21.40,  23.60,  26.40,  29.80,  34.30,
      1   40.40,  49.10,  62.60, 111.30, 112.10, 112.67, 112.95, 113.05,
@@ -11636,11 +11636,11 @@ C              = 3  - the so-called SIMPLE2 mode - see below
 C              = 4  - Eissner-Seaton formula - see below
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (EXPIA1=-0.57721566,EXPIA2=0.99999193,
      *           EXPIA3=-0.24991055,EXPIA4=0.05519968,
      *           EXPIA5=-0.00976004,EXPIA6=0.00107857,
@@ -11813,7 +11813,7 @@ C
 *     nelem is atomic number of element, 2 up to 30
 *     Example:  O+ + H => O + H+ is HCTRecom(2,8)
 *      integer ion , nelem
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       common/CTRTEMP/ te
       common/CTRecomb/ CTRecomb(6,4,30)
 *
@@ -11847,7 +11847,7 @@ C
 *     nelem is atomic number of element, 2 up to 30
 *     Example:  O + H+ => O+ + H is HCTIon(1,8)
 *      integer ion , nelem
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       common/CTRTEMP/ te
       common/CTIon/ CTIon(7,4,30)
 *
@@ -11878,7 +11878,7 @@ C
 *     second dimension is ionization stage,
 *     1=+0 for parent, etc
 *     third dimension is atomic number of atom
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       common/CTIon/ CTIon(7,4,30)
 *      real CTRecomb
 *     second dimension is ionization stage,
@@ -12140,10 +12140,10 @@ C      c) for all other line transitions
 C                           .ge.0 - standard expression
 C                            <  0 - non-standard, user supplie formula
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (CC0   =   5.465D-11,
      *           CEX1  = -30.20581,
      *           CEX2  =   3.8608704,
@@ -12659,7 +12659,7 @@ C IERR error flat (0=ok, 1=T exceeds table range,
 C 2=NI higher than 6 or lower than 1
 C NJ higher than 7 or lower than 2)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 
       DIMENSION COLSTR(16,21),TREF(16)
 
@@ -12844,9 +12844,9 @@ C
 C
 C      ICOL <  0  - non-standard, user supplied formula
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       DIMENSION COL(MTRANS)
       DIMENSION FHE1(16),G0(3),G1(3),G2(3),G3(3),A(6,10)
       PARAMETER (EXPIA1=-0.57721566,EXPIA2=0.99999193,
@@ -13166,7 +13166,7 @@ C     Special formula for collisional rate in hydrogen Lyman-alpha
 C     transition
 C     After Crandall et al. Ap.J. 191, 789 (1974)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION A(6),B(8)
       PARAMETER (C=-118353.41)
       DATA A/ 2.579997D-10, -1.629166D-10,  7.713069D-11,
@@ -13200,9 +13200,9 @@ C         Mihalas (1978, Stellar Atmospheres, 2nd edition)
 C       IC=-1 for neutrals
 C        IC=-2 for ions
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       DIMENSION CHE1FB(3,4)
       DATA CHE1FB/ 9.63675,-2.22941,-17.30103,
      *            10.85578,-2.40931,-27.00903,
@@ -13343,7 +13343,7 @@ C
 C          FIRST REVISED VERSION: D.G.HUMMER, MAY 1988, JILA
 C          slightly modified by I.H.,  July 1988
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (UN=1.D0,
      *           C1=3.849485D0,
      *           C2=8.49485002D-1,
@@ -13637,9 +13637,9 @@ C      II,JJ - indices of the lower and the upper level (in the
 C              numbering of the explicit levels)
 C      IC    - collisional switch ICOL for the given transition
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
 C
       CHEAV=0.
       NI=NQUANT(II)
@@ -13785,9 +13785,9 @@ C            COLLHE, ie. I=1 for 1 sing S, I=2 for 2 trip S, etc.
 C     NJ  - principal quantum number of the (averaged) upper level
 C     IGJ - statistical weight of the upper level
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       
       CHEAVJ=0.
 C
@@ -13896,8 +13896,8 @@ C            to be inverted;
 C      Inversion is accomplished in place and the original matrix is
 C      replaced by its inverse
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       DIMENSION A(NR,NR)
 C
 C  --------- Cray version ------------------
@@ -13989,7 +13989,7 @@ C     ===================
 C
 C     Special routine for an invresion of a 3 x 3 matrix
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (UN=1.D0)
       DIMENSION A(3,3)
 C
@@ -14038,8 +14038,8 @@ C            B  - the rhs vector
 C     Output: X - solution vector
 C     Note that matrix A and vector B are destroyed here
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       DIMENSION A(NR,NR),B(NR),X(NR),D(MLEVEL),IP(MLEVEL)
 c
       if(n.eq.2) then
@@ -14112,7 +14112,7 @@ C     ==================
 C
 C     First exponential integral function E1(X)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (A1  =  -0.57721566,
      *           A2  =   0.99999193,
      *           A3  =  -0.24991055,
@@ -14161,8 +14161,8 @@ C      NXX  - number of elements in array XX
 C     Output:
 C      YY   - interpolated functional values YY=y(XX)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       DIMENSION X(MDEPTH),Y(MDEPTH),XX(MDEPTH),YY(MDEPTH)
 C
 C     no interpolation for NPOL.LE.0 or NX.le.0
@@ -14248,9 +14248,9 @@ C     Output of computed model atmosphere on file 7
 C     This file may be used as input file 8 (initial model atmosphere)
 C     for a subsequent run of the program
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 
 C
       NUMLT=3
@@ -14348,11 +14348,11 @@ C     =================
 C
 C     Output on unit 6 (printer)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
 C
 C ************    Print emergent radiation field on unit 13, namely
 C
@@ -14594,12 +14594,12 @@ C         transfer equations may be represemted as one column, thus
 C         reducing the number of columns of C to number of constraint
 C         equations + 1, ie. the maximum number to MCCOLS=MLEVEL+5.
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/CMATZD/CZZ,CZN,CZE,CZM
       DIMENSION ALF(MTOT,MTOT),BET(MTOT,MDEPTH),DPSI(MTOT)
       EQUIVALENCE (DPSI(1),Y2(1))
@@ -14910,12 +14910,12 @@ C         transfer equations may be represemted as one column, thus
 C         reducing the number of columns of C to number of constraint
 C         equations + 1, ie. the maximum number to MCCOLS=MLEVEL+5.
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION ALF(MTOT,MTOT),BET(MTOT,MDEPTH),DPSI(MTOT)
       COMMON/STOMAT/STOA(MSMX,MSMX,MDEPTH),STOB(MSMX,MSMX,MDEPTH),
      *              STOALF(MSMX,MSMX,MDEPTH)
@@ -15200,12 +15200,12 @@ C     controls evaluation of matrices A,B, and C
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
 C
 C
 C     evaluation of the opacity, emissivity, scattering, and
@@ -15378,12 +15378,12 @@ C     The part of matrices A,B,C corresponding to the linearized
 C     radiative transfer equation
 C     i.e. the first NFREQE rows
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       PARAMETER (XCON=8.0935D-21,YCON=1.68638E-10)
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0)
@@ -16082,12 +16082,12 @@ C     The part of matrices A,B,C corresponding to the linearized
 C     radiative transfer equation
 C     i.e. the first NFREQE rows
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       PARAMETER (XCON=8.0935D-21,YCON=1.68638E-10)
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0)
@@ -16667,12 +16667,12 @@ C     ie. the (NFREQE+INMP)-th row.
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
 C
       NHE=NFREQE+INHE
       NRE=NFREQE+INRE
@@ -16853,12 +16853,12 @@ C     elements of C are treated separately
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/SURFEX/EXTJ(MFREQ),EXTH(MFREQ)
       COMMON/CMATZD/CZZ,CZN,CZE,CZM
 C
@@ -17191,12 +17191,12 @@ C     i.e. the (NFREQE+INHE)-th row;
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/SURFEX/EXTJ(MFREQ),EXTH(MFREQ)
 C
       NHE=NFREQE+INHE
@@ -17478,12 +17478,12 @@ C     i.e. the (NFREQE+INRE)-th row
 C
 C     Input:  ID  - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION REXB(MLEVEL)
       EQUIVALENCE (REX(1),REXB(1))
 C
@@ -17798,12 +17798,12 @@ C     i.e. the (NFREQE+INRE)-th row
 C
 C     Input:  ID  - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION REXB(MLEVEL)
       EQUIVALENCE (REX(1),REXB(1))
 C
@@ -18083,14 +18083,14 @@ C     Atmospheres, 1978, pp. 143-145
 C
 C     Input: ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       dimension sbw(mlevel)
       dimension popp(mlevel)
 c     dimension aaaa(mlevel,mlevel),bbbb(mlevel),
@@ -18164,14 +18164,14 @@ C     the part of B-matrix corresponding to the population rows and
 C     the explicit frequency columns
 C     -- a variant for the full overlap case
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       DIMENSION AJIJ(MFREX,MLVEXP),EHKE(MFREX)
 C
       IF(NFREQE.LE.0) RETURN
@@ -18356,13 +18356,13 @@ C     the part of B-matrix corresponding to the population rows and
 C     populations - i.e. derivatives of the ALI points intensities
 C                   wrt. populations
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
 C
       NSE=NFREQE+INSE-1
       NRE=NFREQE+INRE
@@ -18467,13 +18467,13 @@ C
 C     the part of B-matrix corresponding to the population rows
 C     and T and ne columns
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (TRHA=1.5D0)
       PARAMETER (CCOR=0.09,SIXTH=UN/6.)
       DIMENSION DCOL(MTRANS),AM(MLEVEL)
@@ -18750,13 +18750,13 @@ C
       SUBROUTINE BPOPC(ID)
 C     ====================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       DIMENSION AJ(MLEVEL)
 C
       NSE=NFREQE+INSE-1
@@ -18910,14 +18910,14 @@ C      Dxxy  - array of derivatives of xx (=AB for absorption, =EM for
 C              emission) coefficient wrt y (=T for temperature, =N for
 C              electron density)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       PARAMETER (C14=2.99793D14, CFF1=1.3727D-25)
       common/hmolab/anh2(mdepth),anhm(mdepth)
       DIMENSION DABP0(MLEVEL),DEMP0(MLEVEL)
@@ -19407,11 +19407,11 @@ C     ALI points with respect to the
 C     temperature, electron density, and populations
 C     a variant for consistent tridiagonal operator
 C
-      INCLUDE 'IMPLIC.FOR'     
-      INCLUDE 'BASICS.FOR'     
-      INCLUDE 'ATOMIC.FOR'     
-      INCLUDE 'MODELQ.FOR'     
-      INCLUDE 'ALIPAR.FOR'     
+      INCLUDE 'INCLUDE/IMPLIC.FOR'     
+      INCLUDE 'INCLUDE/BASICS.FOR'     
+      INCLUDE 'INCLUDE/ATOMIC.FOR'     
+      INCLUDE 'INCLUDE/MODELQ.FOR'     
+      INCLUDE 'INCLUDE/ALIPAR.FOR'     
       PARAMETER (T23=TWO/3.D0, T43=4.D0/3.D0)
       DIMENSION DSFP1(MLVEXP),DSFP1M(MLVEXP),DSFP1D(MLVEXP),
      *          DSFP1P(MLVEXP),DSFPMM(MLVEXP)
@@ -20536,11 +20536,11 @@ C     ALI points with respect to the
 C     temperature, electron density, and populations
 C     a variant for consistent tridiagonal operator
 C
-      INCLUDE 'IMPLIC.FOR'     
-      INCLUDE 'BASICS.FOR'     
-      INCLUDE 'ATOMIC.FOR'     
-      INCLUDE 'MODELQ.FOR'     
-      INCLUDE 'ALIPAR.FOR'     
+      INCLUDE 'INCLUDE/IMPLIC.FOR'     
+      INCLUDE 'INCLUDE/BASICS.FOR'     
+      INCLUDE 'INCLUDE/ATOMIC.FOR'     
+      INCLUDE 'INCLUDE/MODELQ.FOR'     
+      INCLUDE 'INCLUDE/ALIPAR.FOR'     
       PARAMETER (T23=TWO/3.D0, T43=4.D0/3.D0)
       DIMENSION DSFP1(MLVEXP),DSFP1M(MLVEXP),DSFP1D(MLVEXP),
      *          DSFP1P(MLVEXP),DSFPMM(MLVEXP)
@@ -21670,11 +21670,11 @@ C     ALI points with respect to the
 C     temperature, electron density, and populations
 C     a variant for consistent tridiagonal operator
 C
-      INCLUDE 'IMPLIC.FOR'     
-      INCLUDE 'BASICS.FOR'     
-      INCLUDE 'ATOMIC.FOR'     
-      INCLUDE 'MODELQ.FOR'     
-      INCLUDE 'ALIPAR.FOR'     
+      INCLUDE 'INCLUDE/IMPLIC.FOR'     
+      INCLUDE 'INCLUDE/BASICS.FOR'     
+      INCLUDE 'INCLUDE/ATOMIC.FOR'     
+      INCLUDE 'INCLUDE/MODELQ.FOR'     
+      INCLUDE 'INCLUDE/ALIPAR.FOR'     
       PARAMETER (T23=TWO/3.D0, T43=4.D0/3.D0)
       DIMENSION DSFP1(MLVEXP),DSFP1M(MLVEXP),DSFP1D(MLVEXP),
      *          DSFP1P(MLVEXP),DSFPMM(MLVEXP)
@@ -22331,11 +22331,11 @@ C     derivatives of the total heating and cooling rates in the
 C     ALI points with respect to the
 C     temperature, electron density, and populations
 C
-      INCLUDE 'IMPLIC.FOR'     
-      INCLUDE 'BASICS.FOR'     
-      INCLUDE 'ATOMIC.FOR'     
-      INCLUDE 'MODELQ.FOR'     
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'     
+      INCLUDE 'INCLUDE/BASICS.FOR'     
+      INCLUDE 'INCLUDE/ATOMIC.FOR'     
+      INCLUDE 'INCLUDE/MODELQ.FOR'     
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION WFL(MDEPTH)     
 C
       if(ifali.le.1) return
@@ -22386,12 +22386,12 @@ C     sub-sub-diagonal band matrix E
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
 C
       IF(IFALI.LE.7) RETURN
       
@@ -22430,12 +22430,12 @@ C     matrices A,B, and C are kept fixed.
 C
 C     Input:  ID - depth index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (XCON=8.0935D-21,YCON=1.68638E-10)
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0)
@@ -23173,11 +23173,11 @@ C     Output:
 C      CHM   - maximum relative change of all unknowns at all depths
 C      CHMT  - maximum relative change in temperature at all depths
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       DIMENSION CHANG(MTOT,MDEPTH),CHANM(MDEPTH)
 C
 C     maximum relative change of all unknowns in depth ID
@@ -23293,10 +23293,10 @@ C               d(abs)/d(pop) = DDN * [1-exp(-h*nu/kT)]
 C               d(em)/d(pop) = DDN * (2h*nu**3/c**2)*exp(-h*nu/kT)
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (FRRAY =  2.463D15,
      *           C18   =  2.997925D18,
      *           CR0   =  5.799D-13,
@@ -23577,7 +23577,7 @@ C                            Opacity Project ionization fractions
 C                            (by routine OPFRAC)
 C      PFSTD(IAT,IZI) - see above
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       COMMON/PFSTDS/PFSTD(99,30),MODPF(99)
       common/irwint/iirwin
       PARAMETER (NIONS=123, NSS=222)
@@ -24531,8 +24531,8 @@ c       (c) O VI from Sparks & Fischel, 1971, NASA SP-3066
 
 c     Output:  PF   partition function
 
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
 
       PARAMETER (P1=0.1402,P2=0.1285,P3=1.,P4=3.15,P5=4.)
       DIMENSION TT(35),PN(10)
@@ -24709,7 +24709,7 @@ C      U     - partition function
 C      DUT   - derivative dU/dT
 C      DUN   - derivative dU/d(ANE)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 C
       U=0.
       DUT=0.
@@ -24751,7 +24751,7 @@ c     Output:  PF   partition function
 c              DUT  d(PF)/dT
 c              DUN  d(PF)/d(ANE)
 c
-      include 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 c
       dimension tt(50),pn(10),nca(9)
       dimension p4a(22),p4b(10,28), 
@@ -25068,7 +25068,7 @@ c     Output:  PF   partition function
 c              DUT  d(PF)/dT
 c              DUN  d(PF)/d(ANE)
 c
-      include 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 c
       dimension g0(6)
       dimension p4a(190),p4b(170)
@@ -25387,7 +25387,7 @@ c
       subroutine opfrac(iat,ion,t,ane,pf,fra)
 c     =======================================
 c
-      include 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       parameter (mtemp =100,
      *           melec = 60,
      *           mion1 = 30,
@@ -25689,7 +25689,7 @@ c     removed code for Z<28; crp- 28 aug, 1995
 C     EDITED 27 JULY 1994 BY GMW - REPLACED PT III PF COEFF. AND IP             
 C     MODE 3 RETURNS PARTITION FUNCTION   
 C                                      
-      INCLUDE 'IMPLIC.FOR' 
+      INCLUDE 'INCLUDE/IMPLIC.FOR' 
       REAL*8 IP
       PARAMETER (DEBCON=1./2.8965E-18,
      *           TVCON=8.6171E-5,
@@ -26058,7 +26058,7 @@ C
 C     KERNEL FUNCTION K2 
 C     AFTER  HUMMER,  1981, J.Q.S.R.T. 26, 187
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (PI2SQ=2.506628275D0, PISQ=1.772453851D0, UN=1.D0,
      *   A1= -1.117897000D-1,   A2= -1.249099917D-1, 
      *   A3= -9.136358767D-3,   A4= -3.370280896D-4,
@@ -26095,10 +26095,10 @@ C
 C     Driving procedure for computing the initial LTE-grey model
 C     atmosphere
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       COMMON ESEMAT(MLEVEL,MLEVEL),BESE(MLEVEL),
      *       DEPTH(MDEPTH),DEPTH0(MDEPTH),TAU(MDEPTH),TAU0(MDEPTH),
@@ -26415,11 +26415,11 @@ C     T      - temperature
 C     ANE    - electron density
 C     ABROSS - Rosseland opacity (per gram)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION A(5)
 C
       DATA A/0.71044609D0,-0.2830385D0,0.57975839D0,-0.75751038D0,
@@ -26505,11 +26505,11 @@ C     F(rad)+F(conv)=F(mech), which yields a cubic equation for
 C     the logarithmic temperature gradient
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON ESEMAT(MLEVEL,MLEVEL),BESE(MLEVEL),
      *       DEPTH(MDEPTH),DEPTH0(MDEPTH),TAU(MDEPTH),TAU0(MDEPTH),
      *       TEMP0(MDEPTH),ELEC0(MDEPTH),DENS0(MDEPTH),DM0(MDEPTH)
@@ -26751,11 +26751,11 @@ C     F(rad)+F(conv)=F(mech), which yields a cubic equation for
 C     the logarithmic temperature gradient
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON ESEMAT(MLEVEL,MLEVEL),BESE(MLEVEL),
      *       DEPTH(MDEPTH),DEPTH0(MDEPTH),TAU(MDEPTH),TAU0(MDEPTH),
      *       TEMP0(MDEPTH),ELEC0(MDEPTH),DENS0(MDEPTH),DM0(MDEPTH)
@@ -26914,10 +26914,10 @@ C     AHMOL - relativer number of hydrogen molecules with respect to the
 C             total number of hydrogens
 C     ENERG - part of the internal energy: excitation and ionization
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       DIMENSION R(3,3),S(3),P(3)
       if(ioptab.lt.-1) return
 C
@@ -27115,10 +27115,10 @@ C     Output:
 C      OPROS - Rosseland opacity (per 1 cm**3)
 C      OPPLA - Planck mean opacity (per 1 cm**3)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       DIMENSION ABSO(MFREQ),SCAT(MFREQ)
 C        
       ABR=0.
@@ -27162,9 +27162,9 @@ C     Output:
 C      OPROS - Rosseland opacity (per gram)
 C      OPPLA - Planck mean opacity (per gram)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C        
       ABR=0.
       SUMDB=0.
@@ -27209,8 +27209,8 @@ C             DELTA - corresponding temperature gradient
 C     Output: FLXCNV - convective flux (expressed as H, ie F/4/pi)
 C             VCONV  - convective velocity
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       COMMON/CUBCON/A,B,DDEL,GRDADB,DLT,RHO,FLXTOT,GRAVD
 C
       VCONV=0.
@@ -27281,8 +27281,8 @@ C             DELTA - corresponding temperature gradient
 C     Output: FLXCNV - convective flux (expressed as H, ie F/4/pi)
 C             VCONV  - convective velocity
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       COMMON/CUBCON/A,B,DDEL,GRDADB,DLT,RHO,FLXTOT,GRAVD
 C
       VCONV=0.
@@ -27356,8 +27356,8 @@ C             DEDPG -  d(energy)/d(PG)
 C             DRDPG -  d(rho)/d(PG)
 C             RHO   -  density
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       DIMENSION T1(3),P1(3),RHON(3),ENERGY(3),entrp(3)
 C
 C   NUMERICAL EVALUATION OF THERMODYNAMIC DERIVATIVES
@@ -27420,8 +27420,8 @@ C     Input:   A,B   - coefficients; transmitted by COMMON/CUBCON
 C              DEL   - DELTA(RAD) - DELTA(ADIAB); also transm. by CUBCON
 C     Output:  DELTA - true gradient
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       COMMON/CUBCON/A,B,DEL,GRDADB,DELMDE,RHO,FLXTOT,GRAVD
       PARAMETER (THIRD = 0.333333333333333D0)
 C
@@ -27484,10 +27484,10 @@ C
 C     Diagnostic outprint of temperature gradients, convective flux,
 C     and their derivatives
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/CUBCON/A,B,DEL,GRDADB,DELMDE,RHO,FLXTOT,GRAVD
 C
       IF(IPRIN.GT.0) WRITE(6,600)
@@ -27625,7 +27625,7 @@ C
 C     complementary error function
 C     expression from Abramowitz and Stegun, p.299, Eq. 7.1.26
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (P  = 0.3275911D0,
      *           A1 = 0.254829592D0,
      *           A2 =-0.284496736D0,
@@ -27661,10 +27661,10 @@ C
 C     The equations and corresponding matrix elements are similar
 C     to those considered by Grenfell, Astr.Ap. 20, 293 (1972).
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       COMMON/CUBCON/ACNV,BCNV,DEL,GRDADB,DELMDE,RHO,FLXTOT,GRAVD
 C
       IF(HMIX0.LE.0.) RETURN
@@ -27885,11 +27885,11 @@ C     is larger than the total flux. If so, the temperature is modified
 C     by an iterative procedure for determining new temperature
 C     that yields convective flux less than SIG4P*TEFF**4
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/CUBCON/ACNV,BCNV,DEL,GRDADB,DELMDE,RHO,FLXTOT,GRAVD
 C
       IF(ICONV.LE.0.AND.INDL.EQ.0) RETURN
@@ -27989,9 +27989,9 @@ C     after a completed iteration of complete linearization
 C
 C     DELTA is defined as d(lnT)/dln(P)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       IF(INDL.EQ.0) RETURN
       IF(IPRINT.GT.3) WRITE(6,600)
@@ -28042,10 +28042,10 @@ C
       SUBROUTINE CONREF
 C     =================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       COMMON/CUBCON/ACNV,BCNV,DEL,GRDADB,DELMDE,RHO,FLXTOT,GRAVD
       common/imucnn/imucon
       dimension idcon(mdepth),
@@ -28381,10 +28381,10 @@ C     Auxiliary procedure called from RESOLV
 C     determination of the total and gas pressures, and logarithmic
 C     gradient of pressure
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       common/icnrsp/iconrs
 C
 C     total pressure, gas pressure, and logarithmic gradient DELTA
@@ -28436,12 +28436,12 @@ C     Auxiliary procedure called from RESOLV
 C     determination of the total and gas pressures, and logarithmic
 C     gradient of pressure
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       COMMON/PRSAUX/VSND2(MDEPTH),HG1,HR1,RR1
       COMMON/DEPTDR/DDM(MDEPTH),DDP(MDEPTH),DD0(MDEPTH),
      *              DDMIN(MDEPTH),DDPLU(MDEPTH),DDA(MDEPTH),
@@ -28630,9 +28630,9 @@ C
 C     Initializes necessary arrays for evaluating hydrogen line profiles
 C     from the Lemke tables
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C      
       DO I=1,4
          DO J=1,22
@@ -28717,9 +28717,9 @@ C
       SUBROUTINE INTLEM(PRFH,WL0,ILINE,ID)
 C     ====================================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (FOC1=1.25e-9,TTW=2./3.,VTBC=6.06e-9)
       DIMENSION PRFH(MHWL)
 C
@@ -28759,9 +28759,9 @@ C     Interpolation in temperature and electron density from the
 C     Lemke tables for hydrogen lines to the actual valus of
 C     temperature and electron density
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION ZZ(3),XX(3),WX(3),WZ(3)
 C
       NX=2
@@ -28857,7 +28857,7 @@ C     Input:  XL - array of x
 C             YL - array of f(x)
 C             XL0 - the point x(0) to which one interpolates
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION XL(3),YL(3)
       A0=(XL(2)-XL(1))*(XL(3)-XL(2))*(XL(3)-XL(1))
       A1=(XL0-XL(2))*(XL0-XL(3))*(XL(3)-XL(2))
@@ -28886,7 +28886,7 @@ C                     exact up to j=6, asymptotic for higher j
 C             WL0   - wavelength of the line i-j
 C             FIJ   - Stark f-value for the line i-j
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (RYD1=911.763811,RYD2=911.495745/4.,CXKIJ=5.5E-5)
       PARAMETER (WI1=911.753578, WI2=227.837832)
       PARAMETER (UN=1.,TEN=10.,TWEN=20.,HUND=100.)
@@ -28949,9 +28949,9 @@ C                    In order to save computer time, the division point
 C                    DIV is calculated in advance by routine DIVSTR.
 C            FAC   - Multiplicative factor (2. for H I; 1. for He II)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (F0=-0.5758228,F1=0.4796232,F2=0.07209481,AL=1.26)
       PARAMETER (SD=0.5641895,SLO=-2.5,THRA=1.5,BL1=1.14,BL2=11.4)
       PARAMETER (SAC=0.08, PISQ1=UN/1.77245385090551D0)
@@ -29006,9 +29006,9 @@ C                     exp(-(beta/betad)**2)/betad/sqrt(pi)=3*beta**-5/2
 C
 C     He II: different definition of parameter ADH !
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (UNQ=1.25,UNH=1.5,TWH=2.5,FO=4.,FI=5.)
       PARAMETER (CA=1.671,BL=5.821,AL=1.26,CX=0.28,DX=0.0001)
       PARAMETER (CA2=0.978,XA2=0.69314718)
@@ -29043,9 +29043,9 @@ C     sets up necessary parameters for routines OPAHYL and OPHYL1, i.e.
 C     for opacity and emissivity in higher hydrogen lines
 C     Also sets up Stark parameters for OPAHYL
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
 C
       ALLIM1=1450.
       ABLIM1=6650.
@@ -29177,10 +29177,10 @@ C
 C     Stores occupation probabilities for hydrogen levels
 C     in common WNCOM for further use
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (SIXTH=UN/6.,CCOR=0.09)
       parameter (p1=0.1402,p2=0.1285,p3=un,p4=3.15,p5=4.)
       parameter (tkn=3.01,ckn=5.33333333,cb0=8.59d14,f23=-2./3.)
@@ -29252,8 +29252,8 @@ c            a   - correlation parameter
 c            ane - electron density
 c            z   - ionic charge
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter (p1=0.1402,p2=0.1285,p3=un,p4=3.15,p5=4.)
       parameter (tkn=3.01,ckn=5.33333333,cb0=8.59d14)
       parameter (f23=-2./3.)
@@ -29296,9 +29296,9 @@ C     for all frequencies
 C      MODE=0  ->  DW=1
 C      MODE>0  ->  DW=1-w
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       parameter (p1=0.1402,p2=0.1285,p3=un,p4=3.15,p5=4.)
       parameter (tkn=3.01,ckn=5.33333333,cb0=8.59d14,f23=-2./3.)
       PARAMETER (FRH=3.28805D15,SQFRH=5.734152D7)
@@ -29352,11 +29352,11 @@ C
 C     Output: ODF - opacity distribution function interpolated to the set of
 C                   explicit frequencies
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (FRH=3.28805D15,CQT=1.284523D12)
       PARAMETER (CCOR=0.09,C00=1.25D-9,CID=0.02654,SIXTH=UN/6.)
       DIMENSION FRO(MFRO),ODF0(MFRO),ABSO0(MFRO),ODF(MFREQ),SGT(MFRO),
@@ -29528,10 +29528,10 @@ C     ==========================================
 C
 C     Auxiliary routine for ODF1 (replaces multiple calls to STARKA)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (F0=-0.5758228,F1=0.4796232,F2=0.07209481,AL=1.26)
       PARAMETER (SD=0.5641895,SLO=-2.5,THRA=1.5,BL1=1.14,BL2=11.4)
       PARAMETER (SAC=0.08, THR=THRA*TWO)
@@ -29596,11 +29596,11 @@ C
 C     Output: FROS - set of internal frequencies
 C                    in common ODFFRQ
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (FRH=3.28805D15,CDOP=2.84511D-7,CDOM=14.)
       PARAMETER (SIX=6.,SEPT=7.)
       DIMENSION FFRO(MFRO)
@@ -29693,10 +29693,10 @@ C
 C     Output: unit 16: <OUT> and <IN> rates, and relative difference, 
 C                      for each level.
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (MLEVES=mlevel)
       DIMENSION ROUT(MLEVES,MDEPTH),RIN(MLEVES,MDEPTH)
       if(ioptab.lt.0) return
@@ -29780,10 +29780,10 @@ C
 C     Acceleration of convergence (from Auer 1987, in Numerical
 C     Radiative Transfer p. 101)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       IF(NITER.LT.IACC .OR. ITER.LT.IACC0) RETURN
       ipng=1
@@ -29888,10 +29888,10 @@ C
 C     Acceleration of convergence for populations
 C     (from Auer 1987, in Numerical Radiative Transfer p. 101)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/POPULS/POPUL1(MLEVEL,MDEPTH),
      *              POPUL2(MLEVEL,MDEPTH),POPUL3(MLEVEL,MDEPTH)
 C
@@ -30032,11 +30032,11 @@ C     =================
 C
 C     Initialization of line ODF's
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       COMMON/STFCR/OFR(MFODF),OW(MFODF),OWSUB(MFODF),
      *          ODFL0(MDODF,MFODF),ODF2(MDEPTH),IFTRA(MTRANS),
      *          IDODF(MDODF),NDODF
@@ -30261,11 +30261,11 @@ C     =======================
 C
 C     Initialization of line ODF's for hydrogen
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (CCM=UN/2.997925D10,THIRD=UN/3.,FRH=3.28805D15)
       DIMENSION FFRO(MFRO)
 C
@@ -30403,11 +30403,11 @@ C
 C     Opacity distribution function for superlines to merged states
 C     (calculated only if DT/T>=CHTL, kept constant after).
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (CHTL=1.D-3)
 C
       DO 10 ITR=1,NTRANS
@@ -30430,11 +30430,11 @@ C     =========================
 C
 C     Line ODF's for hydrogen line series
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (CDOP=TWO*BOLK/HMASS)
       PARAMETER (CA=2.997925D18,CCM=CA/1.D8,FRH=3.28805D15)
       PARAMETER (RYDEL=911.764,TTW=2./3.)
@@ -30531,7 +30531,7 @@ C     ===============================
 C
 C     Sorting routine
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION ARRIN(N),INDX(N)
       DO 11 J=1,N
         INDX(J)=J
@@ -30584,11 +30584,11 @@ C     from the unit INSA (given by IFANCY), with increasing frequencies
 C     It assumes that all continuum transitions for a given ion are
 C     given in a successive order in the data
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (HCCM=H*2.997925D10)
       PARAMETER (TX=2.30258509299405,BAM=1.D-18)
       DIMENSION XIFE(8)
@@ -30683,8 +30683,8 @@ c     comments
 c
 c     lines beginning with ! or * are understood as comments
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       character*80 buff
 c     
       iur=ius 
@@ -30716,10 +30716,10 @@ C     The routine for management of various flags for treating
 C     frequency points; in particular those connected to the so-called 
 C     "subtraction weights" (in the non-overlapping mode only)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (T15=1.D-15)
 C
       NFREQE=0
@@ -30856,10 +30856,10 @@ C     LEXP(ITR) = F - no point within transition ITR is explicit
 C     LALI(ITR) = T - at least one point within transition ITR is ALI
 C     LALI(ITR) = F - no point within transition ITR is ALI
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       INDXP=INDEXP(ITR)
       I0=IFR0(ITR)
@@ -30940,11 +30940,11 @@ C     LEXP(ITR) = F - no point within transition ITR is explicit
 C     LALI(ITR) = T - at least one point within transition ITR is ALI
 C     LALI(ITR) = F - no point within transition ITR is ALI
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
 C
       DO IJ=1,NFREQ
          IJALI(IJ)=1
@@ -31065,10 +31065,10 @@ C
 C     sets up level parameters IIEXP and IIFOR which control the
 C     treatment of levels
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       if(ioptab.lt.0) return
 C
 C     1. case - treatment of levels determined by IMODL
@@ -31247,9 +31247,9 @@ C     =====================
 C
 C     Auxiliary quantities for dissolved fractions
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (SIXTH=UN/6.,CCOR=0.09)
       parameter (p1=0.1402,p2=0.1285,p3=un,p4=3.15,p5=4.)
       parameter (f23=-2./3.)
@@ -31277,9 +31277,9 @@ C     ====================================
 C
 C     dissolved fraction for frequency FR
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (TKN=3.01,CKN=5.33333333,CB0=8.59d14)
       PARAMETER (SQFRH=5.734152D7)
 C
@@ -31313,9 +31313,9 @@ C     ====================================
 C
 C     dissolved fraction for frequency FR
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (TKN=3.01,CKN=5.33333333,CB0=8.59d14,
      *           CB1=3.437977d15,CKN1=1.1666667,
      *           FR0HE14l=8.759d14,FR0HE14h=8.760d14)
@@ -31372,10 +31372,10 @@ C
       SUBROUTINE SGMER0
 C     =================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (FRH=3.28805E15, PH2=2.815D29*2., EHB=157802.77355)
       DIMENSION FREDG(NLMX),S(NLMX),SUM(NLMX),SUD(NLMX)
 C
@@ -31424,10 +31424,10 @@ C     =============================================
 C
 C     photoionization cross-section for a merged level
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       ISU=INT(SQRT(FRCH(IMER)*FRINV))+1
       SGME1=SGMSUM(ISU,IMER,ID)*FR3INV
@@ -31443,10 +31443,10 @@ C     ====================================================
 C
 C     photoionization cross-section for a merged level
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       ISU=INT(SQRT(FRCH(IMER)*FRINV))+1
       SGME1=SGMSUM(ISU,IMER,ID)*FR3INV
@@ -31463,12 +31463,12 @@ C     =================
 C
 C     initialization of only temperature dependent quantities
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (CFF1=1.3727D-25,CFF2=4.3748D-10,CFF3=2.5993D-7)
       PARAMETER (SGFF0 = 3.694D8)
 C
@@ -31508,12 +31508,12 @@ C
 C     initialization of only depth-dependent quantities
 C     for evaluation of opacities
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION PRF(MFREQL),POPP(MLEVEL)
       PARAMETER (CFF1=1.3727D-25,CFF2=4.3748D-10,CFF3=2.5993D-7)
       PARAMETER (SIXTH=UN/6.,CCOR=0.09,T32=1.5D0)
@@ -31669,11 +31669,11 @@ C
 C     initialization of depth-independent quantities
 C     for evaluation of opacities
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
 c 
       do itr=1,ntrans
          idiel(itr)=0
@@ -31730,10 +31730,10 @@ c     Castor, Dykema, Klein, 1992, ApJ 387, 561.
 C
 C     different formulation of the boundary conditions
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/OPTDPT/DT(MDEPTH)
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0,
@@ -32146,10 +32146,10 @@ c     Castor, Dykema, Klein, 1992, ApJ 387, 561.
 C
 C     different formulation of the boundary conditions
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0,
      *           TWOTHR=TWO/3.D0,
@@ -32422,11 +32422,11 @@ C               hydrostatic equilibrium equation, specifically for
 C               accounting for an effect of fixed-option transitions)
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0,
      *           TWOTHR=TWO/3.D0)
@@ -33136,12 +33136,12 @@ C     Output: ABSO -  array of absorption coefficient
 C             EMIS -  array of emission coefficient
 C             SCAT -  array of scattering coefficient 
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (FRH=3.28805E15, PH2=2.815D29*2., EHB=157802.77355)
       PARAMETER (CFF1=1.3727D-25,CFF2=4.3748D-10,CFF3=2.5993D-7)
       PARAMETER (C14=2.99793D14)
@@ -33484,10 +33484,10 @@ C     Sort the frequency sets, and assign to each frequency
 C     a list of contributing transitions
 C     Select final frequency set.
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (SIXTH=UN/6.,FTH=4./3.,V0X=4.D-4,VCX=10.*V0X)
       DIMENSION SX(500)
 C     DIMENSION SGZ(MTRANS)
@@ -33749,11 +33749,11 @@ C       ionization limits
 C          IALIEX=0 :  setup frequencies, all ALI
 C          IALIEX=1 :  change IJALI for explicit frequencies
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (THIRD=UN/3.,FTH=4./3.,TENLG = 2.302585093)
 c      parameter (dfedg=0.000001)
       DIMENSION FRLEV(MLEVEL),IENS(MLEVEL),IJFL(MLEVEL),IJXCO(MFREQC),
@@ -34103,11 +34103,11 @@ C     =================
 C
 C     Setup frequencies in opacity sampling mode
 C       
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       PARAMETER (THIRD=UN/3.,FTH=4./3.)
       DIMENSION FRLEV(MLEVEL),IENS(MLEVEL),ITRL(MLEVEL)
       DIMENSION FRL0(MTRANS),FRL1(MTRANS),FRLC(5*MTRANS)
@@ -34605,10 +34605,10 @@ C     Evaluation of the photoionization cross-section
 C     IBF - index ot the b-f transition
 C     IJ  - frequency index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       IJ0=IJBF(IJ)
       A1=AIJBF(IJ)
@@ -34628,10 +34628,10 @@ C     Evaluation of the photoionization cross-section
 C     IBF - index ot the b-f transition
 C     IJ  - frequency index
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       IJ0=IJBF(IJ)
       A1=AIJBF(IJ)
@@ -34663,10 +34663,10 @@ C
 C     modification of the photoionization cross-section
 C     for taking into account dielectronic recombination
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       do ion=1,nion
          i=nfirst(ion)
@@ -34702,12 +34702,12 @@ C      depth-dependent criterion
 C
 C      automatic explicit frequencies if XGRAD>=0
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION GRADA(MDEPTH),PRID(MDEPTH),GRADI(MFREQ)
       DIMENSION PGT(MDEPTH),GGRT(MDEPTH),XGRD(MDEPTH),XGRD0(10)
       DIMENSION XGRD1(20),XGRD2(20)
@@ -34934,12 +34934,12 @@ C
 C     STRL2 allows to reduce the number of frequency points in
 C       "intermediate-strength" lines
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       DIMENSION PRFTMP(MDEPTH)
 C
       parameter (SIXTH=UN/6.,FTH=4./3.)
@@ -35300,11 +35300,11 @@ C     total source function at the characteristic frequency;
 C     net line (or continuum) source function at the characteristic frequency;
 C     net heating rate (i.e heating minus cooling rate);
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (NPTR=30,CCOR=0.09,SIXTH=UN/6.)
       DIMENSION ST(NPTR,MDEPTH),TAU(NPTR,MDEPTH),
      *          ABST(NPTR,MDEPTH),EMIT(NPTR,MDEPTH),SCTR(NPTR,MDEPTH),
@@ -35433,14 +35433,14 @@ C
 C     NLTE Lucy-Unsold temperature correction scheme, following
 C       Werner & Dreizler
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       DIMENSION HEAT(MDEPTH),ABSZ(MDEPTH),ABSP(MDEPTH),ABSH(MDEPTH),
      *    TOTJ(MDEPTH),TOTH(MDEPTH),TOTB(MDEPTH),DELH(MDEPTH),
      *    EDDF(MDEPTH),DELTAT(MDEPTH),dt1(mdepth),dt2(mdepth),
@@ -35736,11 +35736,11 @@ C     IOBS = 2 : ALL lines except lines to autoionized levels
 C     IOBS = 1 : ALL lines
 C     IOBS = 0 : only lines between observed levels
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       REAL*4 VDOP,AGAM,SIG0,SIGT
       PARAMETER (CSIG=0.0149736)
       COMMON/LINED/WAVE(MLINE),VDOP(MLINE,MDODF),
@@ -35952,11 +35952,11 @@ C      transition. Assumes Gamma(T)=0.05, and T=Teff
 C      Contributions from allowed transitions will be superseded
 C      in routine INKUL.
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
 C
       PARAMETER (BOLCM=1.D8/HK/CAS,CCOR=0.09,SIXTH=UN/6.,GES=0.05)
       DIMENSION GWE(MDEPTH,MLEVEL,2),GWB(MDEPTH,MLEVEL,2),AA(MDEPTH)
@@ -36211,11 +36211,11 @@ C           -  SIG0     : 0.02654/sqrt(pi)*gf/VDOP (divided by g(super) later)
 C           -  VDOP     : Doppler width
 C           -  AGAM     : Damping parameter
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
       REAL*4 VDOP,AGAM,SIG0
 C
       PARAMETER (TEN=10.,TENLG=2.302585093,GES=0.05)
@@ -36387,12 +36387,12 @@ C             EMIS1 -  array of emission coefficient
 C             SCAT1 -  array of scattering coefficient (all scattering
 C                       mechanisms except electron scattering)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (C14=2.99793D14, CFF1=1.3727D-25)
 C
 C     initialize
@@ -36654,10 +36654,10 @@ c
 c     for itr, itrx ne 0 - read input data for an individual transition
 c     and prepare necessary auxiliary arrays
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 c
       parameter (mtrx=1000)
       dimension iex(mtrx),itrind(mtrx),izx0(mtrx),izx1(mtrx),
@@ -36799,7 +36799,7 @@ c     method of barfield, et. al.
 c
 c
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       dimension b(5),a(11,5)
 c
 c      data sigth/6.65e-25/
@@ -36864,7 +36864,7 @@ c    shell ionization threshold should be the lowest one (e.g. the 2p
 c    ionization potential for CI).
 c   
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 c
 c  sm younger jqsrt 26, 329; 27, 541; 29, 61   with moores for undone
 c  a0 for b-like ion has twice 2s plus one 2p  as in summers et al
@@ -36957,7 +36957,7 @@ c
       subroutine dielrc(iatom,iont,temp,xpx,dirt,sig0)
 c     ================================================
 c
-      INCLUDE 'IMPLIC.FOR'      
+      INCLUDE 'INCLUDE/IMPLIC.FOR'      
 c
 c
 c Modification of Tim Kallman's XSTAR routine rrrec to calculate dielectronic
@@ -37343,7 +37343,7 @@ c
       function expo(x)
 c     ================
 c     
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       crit=80.  
       if(x.lt.-crit) x=-crit
       if(x.gt.crit) x=crit
@@ -37366,7 +37366,7 @@ C REF. JOHNSON (1972)
 C
 c     a modification of Tim Kallman's XSTAR routine
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       IF(IC.NE.1) THEN                          ! MAB
          CALL SZIRC(N,T,IC,rno,SE)
          RETURN
@@ -37420,7 +37420,7 @@ c     formula (eq.35) from Sampson & Zhang (1988, ApJ 335, 516)
 c
 c     a modification of Tim Kallman's XSTAR routine
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
        real abethe(11), hbethe(11), rbethe(11)
        DATA(abethe(i),i=1,11)/ 1.134, 0.603, 0.412, 0.313, 0.252,
      1       0.211, 0.181, 0.159, 0.142, 0.128, 1.307 /
@@ -37468,7 +37468,7 @@ c
 c     a modification of Tim Kallman's XSTAR routine
 c
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       if(x.le.1.) go to 100
 c
       b1=9.5733223454
@@ -37512,7 +37512,7 @@ c  1, 2, and 3
 c
 c     a modification of Tim Kallman's XSTAR routine
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
        e1=0.
        e2=0.
        e3=0.
@@ -37535,9 +37535,9 @@ C     =================
 C
 C     sets up necessary parameters for treating the Compton scattering
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       dimension freqi(mfreq)
       parameter (xcon=8.0935d-21,YCON=1.68638E-10)
       parameter (t15=1.d-15)
@@ -37710,8 +37710,8 @@ c
 c     sets up angles points and angle-dependent quantities for treating 
 c     the Compton scattering
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter(three=3.d0, five=5.d0, zero=0.d0, tr16=3.d0/16.d0)
       dimension amu0(mmuc),wtmu0(mmuc)
 c    
@@ -37760,7 +37760,7 @@ C     ================================
 C
 C     set up angle points
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION X(M),W(M)
       PARAMETER (EPS=3.D-14,half=0.5d0,pi=3.141592654d0,quart=0.25,
      *            un=1.d0, two=2.d0)
@@ -37810,8 +37810,8 @@ c               rdown- intensity at the lower boundary (id=nd)
 c               amu0 - cosine of angle of propagation (wrt. the normal)
 c     output:   ri   - radiation intensity
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       dimension dtau(mdepth),st0(mdepth),ri(mdepth),ali(mdepth),
      *          dtx1(mdepth),dtx2(mdepth),dtx0(mdepth)
 C  
@@ -37862,8 +37862,8 @@ C     for one frequency, angle, and for completely known source function;
 c     by the Discontinuous Finite Element method
 c     Castor, Dykema, Klein, 1992, ApJ 387, 561.
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter (one=1.d0)
       dimension dtau(mdepth),st0(mdepth),ri(mdepth),ali(mdepth),
      *          rim(mdepth),rip(mdepth),aim(mdepth),aip(mdepth)
@@ -37953,8 +37953,8 @@ C     formal solver of the radiative transfer equation
 C     for one frequency, angle, and for completely known source function;
 c     original Feautrier (second-order) scheme
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter (one=1.d0)
       dimension dtau(mdepth),s(mdepth),ri(mdepth)
       dimension a(mdepth),b(mdepth),c(mdepth),d(mdepth),
@@ -38036,11 +38036,11 @@ C     and alpha, beta, gamma, for solving the coupled transfer equation
 C     with Compton scattering
 C     Evaluation for a given frequency point IJ.
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/OPTDPT/DT(MDEPTH)
       PARAMETER (XCON=8.0935D-21,YCON=1.68638E-10)
       COMMON/AUXRTE/
@@ -38210,10 +38210,10 @@ C
 C     Auxiliary procedure for INILAM
 C     initialization of g-factors for the Compton scattering
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/comgfs/gfm(mfreq,mdeptc),gfp(mfreq,mdeptc)
       DIMENSION PL(MDEPTH),PLM(MDEPTH)
 C
@@ -38244,11 +38244,11 @@ C     =================
 C
 C     Solution of the radiative transfer equation with Compton scattering
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/OPTDPT/DT(MDEPTH)
       COMMON/AUXRTE/
      *          COMA(MDEPTH),COMB(MDEPTH),COMC(MDEPTH),VL(MDEPTH),
@@ -38428,11 +38428,11 @@ C     other frequencies is given
 C     solution is done for individual angles, and new Eddington factors 
 C     are determined
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       PARAMETER (SIXTH=UN/6.D0,
      *           THIRD=UN/3.D0,
      *           TWOTHR=TWO/3.D0)
@@ -38882,11 +38882,11 @@ C     =================
 C
 C     Solution of the radiative transfer equation with Compton scattering
 C
-      INCLUDE 'IMPLIC.FOR'                                                      
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'                                                      
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/AUXRTE/
      *          COMA(MDEPTH),COMB(MDEPTH),COMC(MDEPTH),VL(MDEPTH),
      *          COME(MDEPTH),U(MDEPTH),V(MDEPTH),BS(MDEPTH),
@@ -39067,11 +39067,11 @@ C     ===============================================================
 C
 c     auxiliary quantities for the Compton scattering source function
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       PARAMETER (XCON=8.0935D-21,YCON=1.68638E-10)
       common/auxcbc/cden1m(mdepth),cden10(mdepth),
      *              cden2m(mdepth),cden20(mdepth)
@@ -39178,11 +39178,11 @@ C
       SUBROUTINE TAUFR1(IJ)
 C     =====================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/OPTDPT/DT(MDEPTH)
       dimension ST0(MDEPTH),SS0(MDEPTH),ab0(mdepth),
      *          tau(mdepth),taus(mdepth)
@@ -39277,11 +39277,11 @@ C     Solution of the radiative transfer equation with Compton scattering
 C     for one frequency at a time (assuming the radiation intensity in other 
 C     frequencies given), for a number of specific intensities (Gaussian)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       PARAMETER (XCON=8.0935D-21,YCON=1.68638E-10)
       COMMON/OPTDPT/DT(MDEPTH)
       COMMON/AUXRTE/
@@ -39486,10 +39486,10 @@ C
 C     initialization of the angle quadrature points for the radiative
 C     transfer equation
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (NMU3=3, NMU5=5, ZERO=0.D0)
       COMMON/EXTINT/WANGLE,EXTIN(MFREQ)
       COMMON/SURFEX/EXTJ(MFREQ),EXTH(MFREQ)
@@ -39556,11 +39556,11 @@ c
 c     modification of the line emission coefficient 
 c     and the scattering coefficient in the case of PRD
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       parameter(a21=4.699e8,pi2=6.28318531,gr=2.*4.8e-8)
 c
       if(ij.gt.0) then
@@ -39711,10 +39711,10 @@ c     =================
 c     
 c     initialization of PRD
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 c
       ntrprd=0
       do itr=1,ntrans
@@ -39782,7 +39782,7 @@ c     omeg = delta omega (circular frequency)
 c     t    = temperature
 c     ane  = electron density (assumed equal to proton density)
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       character*4 aper
       dimension xx(3)
       data xx/0., 50.6205, 68.6112/
@@ -39826,13 +39826,13 @@ C     =================
 C
 C     driver for input specific for disks
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (VELC=2.997925E10, 
      *           pi4=12.5663706d0)
       PARAMETER (GRCON = 6.668D-8)
@@ -40021,9 +40021,9 @@ c
 c     approximate determination of the total disk column
 c     mass, DMTOT
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/relcor/arh,brh,crh,drh
 c
       parameter (xmdsun  = 6.3029e25,
@@ -40089,7 +40089,7 @@ C             BRH  - B  in RH notation
 C             CRH  - C  in RH notation
 C             DRH  - D  in RH notation
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (THIRD=1.D0/3.D0, PI3=1.0471976)
 C
 C  ----------------
@@ -40200,10 +40200,10 @@ C
       SUBROUTINE DMDER
 C     ================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       COMMON/DEPTDR/DDM(MDEPTH),DDP(MDEPTH),DD0(MDEPTH),
      *              DDMIN(MDEPTH),DDPLU(MDEPTH),DDA(MDEPTH),
      *              DDC(MDEPTH),DDB(MDEPTH)
@@ -40266,8 +40266,8 @@ C KAPPA - opacity (cm^2/g)
 C MU    - mean atomic mass (g) = rho/N
 C--------------------------------------------------------------------
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       REAL*8 KAPPA,MU
       COMPLEX*16 COEFF(11),XGUESS
 C
@@ -40342,7 +40342,7 @@ C     ============================
 C
 C     Routine from Numerical Recipees
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       COMPLEX*16 a(m+1),x
       PARAMETER (EPSS=2.e-7,MR=8,MT=10,MAXIT=MT*MR)
       REAL frac(MR)
@@ -40405,9 +40405,9 @@ C     =================
 C
 C     Driving procedure for computing the initial LTE-grey disk model
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C
       PARAMETER  (ERRT=1.D-3, THIRD=UN/3.D0, FOUR=4.D0)
       DIMENSION TAU0(MDEPTH),TEMP0(MDEPTH),ELEC0(MDEPTH),
@@ -40933,10 +40933,10 @@ C            > 1      -    next iterations; temperature is given,
 C                          only evaluation of electron density and
 C                          populations
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/PRSAUX/VSND2(MDEPTH),HG1,HR1,RR1
       COMMON/FLXAUX/T4,PGAS,PRAD,PGM,PRADM,ITGMAX,ITGMX0
       COMMON/FACTRS/GAMJ(MDEPTH),GAMH,FAK0
@@ -41070,9 +41070,9 @@ c     input;   ID   - depth index
 c              TAUF - current estimate of the flux-mean opacity
 c     output:  T    - local temperature
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       parameter (c1=0.8112,c2=3.966e14,c3=6.745e-10,c4=0.96,
      *           c23=c2*c3,c34=c3*c4)
 c
@@ -41132,7 +41132,7 @@ c     solution done by the Newton-Raphson method
 c
 c     Initial estimate
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 c
       if(a.gt.b) then
          x=(c/a)**0.25
@@ -41188,9 +41188,9 @@ C     The procedure also calulates all the necessary state parameters
 C     for the new depth scale (density, z, pressure, opacities, and
 C     temperature)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (TEN=1.D1)
       DIMENSION TAU(MDEPTH),TAUL(MDEPTH),DM0(MDEPTH),DENS0(MDEPTH),
      *          ABRS0(MDEPTH),ABPL0(MDEPTH)
@@ -41381,9 +41381,9 @@ C
 C     New m-scale, calculated as that corresponding to the new
 C     grid better representing temperature variations
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION DM0(MDEPTH),DM11(MDEPTH),DENS0(MDEPTH),ZD0(MDEPTH),
      *          T0(MDEPTH),T1(MDEPTH),ELEC0(MDEPTH),PT0(MDEPTH),
      *          ABRS0(MDEPTH),ABPL0(MDEPTH)
@@ -41506,8 +41506,8 @@ c     determined by dividing the curve Y=f(x) into n-1 equal segments;
 c     the x-coordinates of the endpoints of the individual segments 
 c     define new grid points
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       DIMENSION X(N),Y(N),XNEW(N),YNEW(N),Z(MDEPTH)
 C
 C     original segments - lengths (Z), and directional cosines (CD);
@@ -41572,9 +41572,9 @@ C             HG1   - gas pressure scale height at the surface
 C             RR1   - ratio of radiation and gas pressure scale heights
 C                     at the surface
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       COMMON/PRSAUX/VSND2(MDEPTH),HG1,HR1,RR1
       DIMENSION P(MDEPTH),B(2,2),C(2,2),VL(2),
      *          D(2,2,MDEPTH),ANU(2,MDEPTH)
@@ -41781,9 +41781,9 @@ C     4) z-m relation
 C     with a given temperature and radiation pressure
 C     Numerical solution by a Newton-Raphson method
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (MP=6,NP=6,IP=1,IG=2,IR=3,IN=4,IE=5,IZ=6)
       PARAMETER (NITERH=15)
       COMMON/PRSAUX/VSND2(MDEPTH),HG1,HR1,RR1
@@ -42191,9 +42191,9 @@ C     with known density
 C     the resulting tridiagonal system is solved by the standard
 C     elimination
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION D(MDEPTH),ANU(MDEPTH)
 C
 C     forward elimination
@@ -42246,9 +42246,9 @@ C            HG    - gas pressure scale height
 C            DM1   - mass at the first depth point
 C            DMTOT - mass at the last depth point (central plane)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (PISQ=1.77245385090551D0,pisq2=pisq*half)
 C
 C     Mass-depth grid - logarithmicaly equidistant
@@ -42365,7 +42365,7 @@ C
 C     Determination of the total pressure scale height
 C     Solution of the transcendental equation by the Newton-Raphson method
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       PARAMETER (UN=1.D0,
      *           PISQ=1.77245385090551D0)
       IF(R.LT.0.88) THEN
@@ -42402,7 +42402,7 @@ C     ==================
 C
 C     Approximate inverse complementary error function inverfc(x)
 C
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       parameter (pisq=1.77245385090551D0, pisq2=pisq/2.d0)
       XL=-LOG(X)
       REL=0.88623D0+XL*(7.4871471D-3-XL*1.7726701D-4)
@@ -42428,13 +42428,13 @@ C     =================
 C
 C     Evaluation of integrated radiative intensities and moments
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/OPTDPT/DT(MDEPTH)
       COMMON/SURFEX/EXTJ(MFREQ),EXTH(MFREQ)
       COMMON/TOTJHK/TOTJ(MDEPTH),TOTH(MDEPTH),TOTK(MDEPTH),
@@ -42534,14 +42534,14 @@ C     =================
 C
 C     Evaluation of cooling and heating rates for each ion
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       parameter (pi4=4.*3.14159265d0)
       DIMENSION CLHT1(MDEPTH),CLHT2(MDEPTH),CLHT3(MDEPTH)
       DIMENSION CLRAT(MION,MDEPTH),HTRAT(MION,MDEPTH)
@@ -42660,12 +42660,12 @@ C             EMIS1 -  array of emission coefficient
 C             SCAT1 -  array of scattering coefficient (all scattering
 C                       mechanisms except electron scattering)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ODFPAR.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/COOLCO/ABSOTI(MION,MDEPTH),EMISTI(MION,MDEPTH),
      *               ABSOC1(MDEPTH),EMISC1(MDEPTH)
       PARAMETER (C14=2.99793D14, CFF1=1.3727D-25)
@@ -42968,11 +42968,11 @@ C     Auxiliary procedure for RESOLV
 C     initialization of necessary quantities for treating the viscosity
 C     in disks
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
 C
       AMUV0=DMVISC**(ZETA0+UN)
       AMUV1=UN-AMUV0
@@ -43083,12 +43083,12 @@ C     Auxiliary procedure for RESOLV  - for disks
 C     recomputation of the m-scale in the case where z-scale is the
 C     basic scale
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       dimension dma(mdepth),dmb(mdepth)
 C
 C     total pressure and gas pressure
@@ -43154,11 +43154,11 @@ C
       SUBROUTINE GREYD
 C     ================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (ERRM0=1.E-3, NTRM=50)
 C
       CHI0=20.
@@ -43243,10 +43243,10 @@ C     ANE   - electron density
 C     ANP   - proton number density
 C     AHTOT - total hydrogen number density
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       DIMENSION R(3,3),S(3),P(3)
 C
       QM=0.
@@ -43414,10 +43414,10 @@ c     =====================
 c
 c     quasi-molecular opacity for Lyman alpha and beta
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/quasun/tqmprf,iquasi,nunalp,nunbet,nungam,nunbal
       dimension sgd(mdepth)
 c
@@ -43483,8 +43483,8 @@ c     and Balmer alpha, including the quasi-molecular satellites;
 c     valid for first and second order in neutral and ionized H density
 c     modified routine provided originally by D. Koester
 c           
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter (NXMAX=1400,NNMAX=5,NTAMAX=6)
       common/quasun/tqmprf,iquasi,nunalp,nunbet,nungam,nunbal
       common /callarda/xlalp(NXMAX),plalp(NXMAX,NNMAX),stnnea,stncha,
@@ -43606,8 +43606,8 @@ c             if integrated over A;
 c             It then renormalized by multiplying by
 c             8.853e-29*lambda_0^2*f_ij
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter (NXMAX=1400,NNMAX=5,NTAMAX=6)
       parameter (xnorma=8.8528e-29*1215.6*1215.6*0.41618,
      *           xnormb=8.8528e-29*1025.73*1025.7*0.0791,
@@ -43825,8 +43825,8 @@ c             if integrated over A;
 c             It then renormalized by multiplying by
 c             8.853e-29*lambda_0^2*f_ij
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       parameter (NXMAX=1400,NNMAX=5,NTAMAX=6)
       parameter (xnorma=8.8528e-29*1215.6*1215.6*0.41618)
       common /calphatd/xlalpd(NXMAX,NTAMAX),plalpd(NXMAX,NNMAX,NTAMAX),
@@ -43980,10 +43980,10 @@ c
 c subroutine to calculate the depth dependent abundance profile for
 c a layered H+He atmosphere.
 c
-      INCLUDE 'IMPLIC.FOR'                                                      
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'                                                      
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       common/hediff/ hcmass,radstr
 c     real depth(mdepth+1),qs(mdepth+1),
       dimension depth(mdepth+1),qs(mdepth+1),
@@ -44078,7 +44078,7 @@ c     ==============================
 c
 c     auxiliary function for subroutine hedif
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 c
       b=1+gam
       c=z1+z2*gam
@@ -44096,8 +44096,8 @@ C     ****************************************************************
 C
 C
       subroutine opa_ot(nd0,wl,te,de,op,et)
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       dimension te(mdepth),de(mdepth),op(mdepth),et(mdepth)
       call opa_ot_mock(nd0,wl,iopt,te,de,op,et)
       return
@@ -44108,8 +44108,8 @@ c
 
       subroutine opa_ot_mock(nd0,wl,iopt,te,de,op,et)
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       dimension te(mdepth),de(mdepth),op(mdepth),et(mdepth)
 c
       if(iopt.eq.1) return
@@ -44143,9 +44143,9 @@ c     nu:     array of frequencies
 c     table:  absorptive opacities in cm^2/gm
 c     (NOTE:  Quantities in absorption.tab are in log_e)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/intcff/yint(mfreq),jint(mfreq)
 c
       dimension absort(mfrtab),frlt(mfrtab)
@@ -44314,9 +44314,9 @@ c     ===================
 c  
 c     set up a table of Rayleigh scattering opacity
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 c
       do id=1,nd
        t=temp(id)
@@ -44359,10 +44359,10 @@ C
       SUBROUTINE RAYLEIGH(MODE,IJ,ID,SCR)
 C     ===================================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ATOMIC.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       PARAMETER (FRRAY =  2.463D15,
      *           C18   =  2.997925D18,
      *           CR0   =  5.799D-13,
@@ -44401,9 +44401,9 @@ C              RHO - density     (g cm^-3)
 C      Outout: AB  - absorptive opacity  (per gram)
 C              SC  - scattering opacity  (per gram) 
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       parameter (nmiean = 20,
      *           frray0 = 5.0872638d14)
 C
@@ -44495,10 +44495,10 @@ C     Output: ABSO1 -  array of absorption coefficient
 C             EMIS1 -  array of emission coefficient
 C             SCAT1 -  array of scattering coefficient
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       common/hmolab/anh2(mdepth),anhm(mdepth)
 C
       FR=FREQ(IJ)
@@ -44542,12 +44542,12 @@ C      Dxxy  - array of derivatives of xx (=AB for absorption, =EM for
 C              emission, =SC for scattering) coefficient 
 C              wrt y (=T for temperature, =N for density)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       common/rhoder/drhodt(mdepth)
       PARAMETER (DELT=1.D-3, DELR=1.D-3)
       common/dsctva/dsct1(mdepth),dscn1(mdepth)
@@ -44630,7 +44630,7 @@ C      and entropy (S), as a function of T and rho;
 C
 C      stores P(rho,T) and S(rho,t) in arrays PL and SL
 C
-       INCLUDE 'IMPLIC.FOR'
+       INCLUDE 'INCLUDE/IMPLIC.FOR'
        COMMON/THERM/SL(330,100),PL(330,100)
        COMMON/TABLTD/R1,R2,T1,T2,T12,T22,INDEX
        common/tdedge/redge,pedge(100),sedge(100),cvedge(100),
@@ -44721,9 +44721,9 @@ C
 C     Input:   T - temperature (K)
 C              P - total pressure (cgs)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       parameter(wmol0=1.67333E-24/2.3)
       data inirea /0/
 C
@@ -44761,9 +44761,9 @@ C
       SUBROUTINE SETDRT
 C     =================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       COMMON/RHODER/DRHODT(MDEPTH)
       PARAMETER(DDTMIN=0., DDTPLU=0.001)
 C
@@ -44797,8 +44797,8 @@ C             GRDADB - adiabatic gradient d(ln T)/d(ln P)_ad
 C             RHO   -  density
 C
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
       COMMON/CC/DPDR,DPDT,DSDT,DSDR,CV,S,GAMMA
       COMMON/CONVOUT/CFLX(MDEPTH),VELCON(MDEPTH),GRADAD(MDEPTH),
      &               ENT(MDEPTH)
@@ -44861,7 +44861,7 @@ C      ============================
 C
 C      interpolates pressure and entropy from tables
 C
-       INCLUDE 'IMPLIC.FOR'
+       INCLUDE 'INCLUDE/IMPLIC.FOR'
        COMMON/THERM/SL(330,100),PL(330,100)
        COMMON/TABLTD/R1,R2,T1,T2,T12,T22,INDEX
        common/tdedge/redge,pedge(100),sedge(100),cvedge(100),
@@ -44934,9 +44934,9 @@ c     nu:     array of frequencies
 c     table:  absorptive opacities in cm^2/gm
 c     (NOTE:  Quantities in absorption.tab are in log_e)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 c
       dimension absort(mfrtab)
       character*(80) optable
@@ -45058,10 +45058,10 @@ C     Output through common
 c
 c     Input data given in file tsuji.molec
 c 
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
 c
       character*128 MOLEC
       COMMON/COMFH1/C(600,5),PPMOL(600),APMLOG(600),
@@ -45366,9 +45366,9 @@ C
       SUBROUTINE RUSSEL(TEM,PG)
 c     =========================
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       COMMON/COMFH1/C(600,5),PPMOL(600),APMLOG(600),
      *              XIP(100),CCOMP(100),UIIDUI(100),P(100),
      *              FP(100),XKP(100),EPS,SWITER,
@@ -45720,7 +45720,7 @@ c     ======================
 c
 c     TiO partition function (data from Kurucz web site)
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       dimension pf0(800)
       data pf0/       
      *    29.107,    55.425,    82.417,   111.190,   142.564,   176.916,
@@ -45876,12 +45876,12 @@ C
 C     driver of the complete-linearization solution in the Rybicki 
 C     formalism
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
-      INCLUDE 'ITERAT.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
       COMMON/RYBMTX/RA(MDEPTH),RB(MDEPTH),RC(MDEPTH),VR(MDEPTH),
      *              UA(MDEPTH),UB(MDEPTH),UC(MDEPTH),    
      *              VA(MDEPTH),VB(MDEPTH),VC(MDEPTH),WR(MDEPTH), 
@@ -46011,11 +46011,11 @@ C
 C     evaluation of the complete-linearization matrices in the Rybicki
 c     formalism
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       COMMON/RYBMTX/RA(MDEPTH),RB(MDEPTH),RC(MDEPTH),VR(MDEPTH),
      *              UA(MDEPTH),UB(MDEPTH),UC(MDEPTH),    
      *              VA(MDEPTH),VB(MDEPTH),VC(MDEPTH),WR(MDEPTH), 
@@ -46459,11 +46459,11 @@ c     corresponding to the contribution of ALI frequencies and the
 c     convection to the radiative/convective equilibrium equation in
 c     the Rybicki formalism
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       COMMON/CUBCON/ACNV,BCNV,DEL,GRDADB,DELMDE,RHO,FLXTOT,GRAVD
       COMMON/RYBMTX/RA(MDEPTH),RB(MDEPTH),RC(MDEPTH),VR(MDEPTH),
      *              UA(MDEPTH),UB(MDEPTH),UC(MDEPTH),    
@@ -46704,12 +46704,12 @@ C     =========================
 C
 C     handling relative changes in the Rybicki formalism
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'ITERAT.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
-      INCLUDE 'ARRAY1.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
+      INCLUDE 'INCLUDE/ARRAY1.FOR'
       common/grdpra/GRD(MDEPTH),pra(mdepth),pgs0(mdepth)
       common/pradfa/pradfc(mdepth)
       DIMENSION CHANGT(MDEPTH),TMPOLD(MDEPTH)
@@ -46828,7 +46828,7 @@ C     solution of the tridiagonal system
 c
 c     from Numerical recipes, Sect 2.4
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       DIMENSION A(N),B(N),C(N),R(N),U(N),GAM(N)
 C
       BET=B(1)
@@ -46867,10 +46867,10 @@ C      SCAT1 - array of scattering coefficient
 C      Dxxy  - array of derivatives of xx (=AB for absorption, =EM for
 C              emission, =SC for scattering) coefficient wrt T
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ALIPAR.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ALIPAR.FOR'
       PARAMETER (DELT=1.D-3)
       common/dsctva/dsct1(mdepth),dscn1(mdepth)
       common/hmolab/anh2(mdepth),anhm(mdepth)
@@ -46958,9 +46958,9 @@ C
       SUBROUTINE RYBHEQ
 C     =================
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/grdpra/GRD(MDEPTH),pra(mdepth),pgs0(mdepth)
       common/pradfa/pradfc(mdepth)
 c
@@ -47049,7 +47049,7 @@ c******************************************************************************
       subroutine cia_sub(ah2,t,f,opac)
 c     ================================
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
 c
       parameter (nlines=1000)
       real*8 mh2
@@ -47141,7 +47141,7 @@ c************************************************************************
       SUBROUTINE locate(xx,n,x,j,nxdim)
 c     =================================
 c
-      INCLUDE 'IMPLIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
       dimension xx(nxdim)
 c
       jl=0
@@ -47177,9 +47177,9 @@ C
 C     Initializes necessary arrays for evaluating hydrogen line profiles
 C     from the XENOMORPH tables
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
 C    
       DO I=1,4
          DO J=1,22
@@ -47287,9 +47287,9 @@ C     Interpolation in temperature and electron density from the
 C     Xenomorph tables for hydrogen lines to the actual valus of
 C     temperature and electron density
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       DIMENSION ZZ(3),XX(3),WXB(3),WZB(3),WXR(3),WZR(3)
 C
       NX=2
@@ -47350,9 +47350,9 @@ c     nu:     array of frequencies
 c     table:  absorptive opacities in cm^2/gm
 c     (NOTE:  Quantities in absorption.tab are in log_e)
 C
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
       common/intcfg/yint(mfreq),jgint(mfreq)
 c
       dimension absort(mfhtab),frlt(mfhtab)
@@ -47461,10 +47461,10 @@ C     =====================
 c 
 c     hydrogen opacity -lines + pseudocontinuum from Gomez tables
 c
-      INCLUDE 'IMPLIC.FOR'
-      INCLUDE 'BASICS.FOR'
-      INCLUDE 'MODELQ.FOR'
-      INCLUDE 'ATOMIC.FOR'
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
       common/intcfg/yint(mfreq),jgint(mfreq)
 c
       if(ihgom.eq.0.or.jgint(ij).eq.0) return
