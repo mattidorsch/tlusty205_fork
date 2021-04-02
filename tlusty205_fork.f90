@@ -474,7 +474,7 @@ C
          LINEXP(IT)=(.NOT.LINE(IT).OR.INDEXP(IT).EQ.0)
          IF(LINEXP(IT)) GO TO 125
          FFMX=0.
-         DO IJ=IFR0(IT),IFR1(IT)
+         DO IJ=MAX(IFR0(IT),1),IFR1(IT)
             FFMX=MAX(FFMX,FREQ(IJ))
          END DO
          FRQMX(IT)=FFMX
@@ -528,8 +528,8 @@ C
           icdw=mcdw(itr)
           if(icdw.ge.1) nncdw=nncdw+1
       end do
-      if(nncdw.gt.mmcdw) 
-     &  call quit(' Too many pseudo-continua',nncdw,mmcdw)
+      if(nncdw.gt.mmcdw) call quit('Too many pseudo-continua',
+     *                             nncdw, mmcdw)
 c
 C  -----------------------------------------------------------
 C     read the input model
@@ -2441,7 +2441,10 @@ c
          end do
          endif
          if(i.ge.18) then
-         do j=18,30
+c        xio3: j -> ionization stage
+c        xio3: i -> z
+C         do j=18,30
+         do j=18,26
             enev(i,j)=xio3(j-17,i-17)
          end do
          end if
@@ -5506,7 +5509,7 @@ C
       LREFP=.TRUE.
       LREFP=.false.
       IF(MODREF.GE.1) THEN
-         IF(IMODE.EQ.1.AND.(ITER.LE.1.OR.KANT(ITER).EQ.0)) THEN
+         IF(IMODE.EQ.1.AND.(ITER.LE.1.OR.KANT(MAX(ITER,1)).EQ.0)) THEN
             DO 20 IAT=1,NATOM
                PMAX=0.
                IREF=0
@@ -6672,7 +6675,7 @@ C
       SUBROUTINE ALIST1
 C     =================
 C
-C     Evaluation of all nexcessary ALI parameters + radiative rates
+C     Evaluation of all necessary ALI parameters + radiative rates
 C     (the routine is analogous to RATES1)
 C
 C
@@ -6931,7 +6934,7 @@ C
       SUBROUTINE ALIST2
 C     =================
 C
-C     Evaluation of all nexcessary ALI parameters + radiative rates
+C     Evaluation of all necessary ALI parameters + radiative rates
 C     (the routine is analogous to RATES1)
 C     a variant for derivatives of the rate matrix w.r.t. populations
 C
@@ -8231,7 +8234,7 @@ C     =================
 C
 C     Simplified routine ALIST1 for Kantorovich iteration
 C
-C     Evaluation of all nexcessary ALI parameters + radiative rates
+C     Evaluation of all necessary ALI parameters + radiative rates
 C
       INCLUDE 'INCLUDE/IMPLIC.FOR'
       INCLUDE 'INCLUDE/BASICS.FOR'
@@ -8399,7 +8402,7 @@ C     =================
 C
 C     Simplified routine ALISET for Kantorovich iteration
 C
-C     Evaluation of all nexcessary ALI parameters + radiative rates
+C     Evaluation of all necessary ALI parameters + radiative rates
 C     (the routine is analogous to RATES)
 C
 C
@@ -9392,7 +9395,7 @@ C
          FID=OS0*FIJ*DBETA
          FID0=OS0*(OSC0(IT)-FIJ)*DOP1*PISQ1
          CALL DIVSTR(IZZ)
-         DO IJ=IFR0(IT),IFR1(IT)
+         DO IJ=MAX(IFR0(IT),1),IFR1(IT)
             BETA=DBETA*ABS(FREQ(IJ)-FR0(IT))
             SG=STARKA(BETA,fac)*FID
             SG0=0.
@@ -9509,7 +9512,7 @@ C
 C     Depth-independent profile
 C
       IF(ISPODF.EQ.0) THEN
-         DO IJ=IJ0,IJ1
+         DO IJ=MAX(IJ0,1),IJ1
             PRF(IJ-IJ0+1)=PROF(IJ)
          END DO
        ELSE
@@ -30958,7 +30961,7 @@ C     Overlapping lines at frequency IJ
 C
       DO 10 IT=1,NTRANS
          IF(LINEXP(IT)) GO TO 10
-         DO IJ=IFR0(IT),IFR1(IT)
+         DO IJ=MAX(IFR0(IT),1),IFR1(IT)
             NLINES(IJ)=NLINES(IJ)+1
             ITRLIN(NLINES(IJ),IJ)=int2(IT)
          END DO
@@ -31169,7 +31172,7 @@ C
             END DO      
    30    CONTINUE
          IF(IGRP.EQ.1) THEN
-            DO I=N0A(IAT),NKA(IAT)
+            DO I=MAX(N0A(IAT),1),NKA(IAT)
                IMODL(I)=7
             END DO
          END IF
@@ -33259,7 +33262,7 @@ C
          JJ=IUP(ITR)
          IF(INDXA.LT.2.OR.INDXA.GT.4) THEN
          CALL LINPRO(ITR,ID,PRF)
-         DO 28 IJ=IJL0,IJL1
+         DO 28 IJ=MAX(IJL0,1),IJL1
             PRFLIN(ID,IJ)=real(PRF(IJ-IJL0+1))
    28    CONTINUE
          ENDIF
@@ -34142,12 +34145,12 @@ C
       FLNU(2*NATOM+1)=DLOG(FRS2)
       FLNU(2*NATOM+2)=DLOG(FRCMIN)
       NNU=2*NATOM+3
-      IF(ISPODF.EQ.1 .AND. DDNU.GT.0.) THEN 
+      IF(ISPODF.EQ.1 .AND. DDNU.GT.0.) THEN
          CDOP=TWO*BOLK/AMASS(NATOM)
          IF(IELNU.GT.0) CDOP=TWO*BOLK/XMASS(IELNU)/HMASS
          DLNU(NNU)=DDNU/2.997925D10*SQRT(CDOP*TSNU+VTNU*VTNU)
          FLNU(NNU)=DLOG(FRS2)
-       ELSE     
+       ELSE
          DLNU(NNU)=DLNU(2*NATOM+2)
          FLNU(NNU)=DLOG(FRS1)
       END IF
@@ -34383,7 +34386,7 @@ C
                      IF(FLNU(IKNU).GT.D0) FLNU(IKNU)=D0
                    ELSE
                      D0=DLOG(FRL1(ITR))
-                     IF(FLNU(IKNU).GT.D0) FLNU(IKNU)=D0 
+                     IF(FLNU(IKNU).GT.D0) FLNU(IKNU)=D0
                   END IF
                END IF
              ELSE
@@ -34421,7 +34424,7 @@ C
                      IF(FLNU(IKNU).GT.D0) FLNU(IKNU)=D0
                    ELSE
                      D0=DLOG(FRL1(ITR))
-                     IF(FLNU(IKNU).GT.D0) FLNU(IKNU)=D0 
+                     IF(FLNU(IKNU).GT.D0) FLNU(IKNU)=D0
                   END IF
                   IF(DLOG(FR0(ITR)).EQ.XFRB) IJTC(ITR)=NFREQ
                END IF
@@ -34459,7 +34462,7 @@ C
       FREQ(NFREQ)=FRCMIN
       DO 20 ITR=1,NTRANS
          IF(LINEXP(ITR)) GO TO 20
-         DO IJ=IFR0(ITR),IFR1(ITR)
+         DO IJ=MAX(IFR0(ITR),1),IFR1(ITR)
             NLINES(IJ)=NLINES(IJ)+1
          END DO
    20 CONTINUE
@@ -34503,9 +34506,9 @@ C
             IJTC(ITR)=IFR1(ITR)
          END IF
          IF(IFREQB(NFREQC).LT.(IB1-1)) THEN
-            NFREQC=NFREQC+1 
+            NFREQC=NFREQC+1
            IFREQB(NFREQC)=IB1-1
-         END IF  
+         END IF
          IF(IFREQB(NFREQC).LT.IB1) THEN
             NFREQC=NFREQC+1
             IFREQB(NFREQC)=IB1
@@ -34552,7 +34555,8 @@ C
          END IF
          IF(NF.GT.NFLX) NFLX=NF
          IF(KFR1(IT).GT.MFREQP)
-     *      CALL QUIT('Too many cross-sections to store in PRFLIN',
+     *      CALL QUIT('Too many cross-sections to store in PRFLIN 
+     *      (KFR1(IT).GT.MFREQP)',
      *                kfr1(it),mfreqp)
   410 CONTINUE
 C
@@ -34584,6 +34588,7 @@ C
       END DO
       NPPX=NFREQ
 C
+C     first line of fort.10 in OS
       write(10,*) nfreq,nfreqc,nfreql,nflx
       IF(NFREQ.GT.MFREQ) THEN
          WRITE(10,1000) NFREQ
