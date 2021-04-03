@@ -1,5 +1,5 @@
 all:
-	gfortran -g -fno-automatic -ffixed-form -fcheck=mem-O3 -mcmodel=medium -o t205_fork tlusty205_fork.f90
+	gfortran -g -fno-automatic -ffixed-form -fcheck=mem -O3 -mcmodel=medium -o t205_fork tlusty205_fork.f90
 
 cluster:
 #	module load gcc/6.5.0
