@@ -25324,11 +25324,16 @@ c
       if(it.ge.350) it=349
       t1=1000.*it
       t2=t1+1000.
+  998 format(i4,e9.3)
       if(ion.eq.4) then
         if(t.le.200000.) then
           xu1=p4a(it-10)
           xu2=p4a(it-9)
         else
+C          write(*,*)'it=',it,' t=',t
+          WRITE(6,998) it, t
+          write(*,*) 'it',it
+          WRITE(10,*) it, t
           xu1=p4b(it-180)
           xu2=p4b(it-179)
         endif
@@ -34540,6 +34545,7 @@ C
   411    NF=IFR1(IT)-IFR0(IT)+1
          KFR0(IT)=NFREQL+1
          KFR1(IT)=NFREQL+NF
+C        this should not be compared to mfreql
          NFREQL=NFREQL+NF
          IF(INDXPA.EQ.2) THEN
             FR02H=HALF*(FREQ(IFR0(IT))+FREQ(IFR1(IT)))
@@ -34589,6 +34595,9 @@ C
       NPPX=NFREQ
 C
 C     first line of fort.10 in OS
+      write(10,'(4A12)') "nfreq", "nfreqc", "nfreql", "nflx"
+      write(10,'(4A12)') "->mfreq", "->mfreqc", "->mfreqp", "->mfreql"
+C      write(10,'(4I12)') nfreq,nfreqc,nfreql,nflx
       write(10,*) nfreq,nfreqc,nfreql,nflx
       IF(NFREQ.GT.MFREQ) THEN
          WRITE(10,1000) NFREQ
@@ -35917,11 +35926,12 @@ C
                     END DO
                  END DO
               END IF
-              IF(KJ.GT.MCFE) 
-     &           CALL QUIT(' Too many Fe cross-sect. to store',
-     &                    KJ,MCFE)
+              IF(KJ.GT.MCFE) THEN
+                 CALL QUIT(' Too many Fe cross-sect. to store',
+     *                     KJ,MCFE)
+C                don't need to write fort.41 for grid
                  WRITE(41,313) IL,IU,W1,W2,IFRKU,NFT,NLT,OSC0(ITR)
-C             END IF
+              END IF
               IF(NFT.GT.NFTMX) NFTMX=NFT
            END DO
         END DO
