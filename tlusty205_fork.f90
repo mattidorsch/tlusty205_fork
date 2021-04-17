@@ -23194,6 +23194,7 @@ C
          chpop=0.
          cht=0.
          che=0.
+         njjp=0 ! number of non-converged level pop.
          DO 10 I=i1,NN
             IF(ITER.EQ.1.AND.I.EQ.NFREQE+INDL) GO TO 10
           IF(I.GE.NFREQE+INSE) THEN
@@ -23214,6 +23215,7 @@ C
          DO 12 I=NFREQE+INSE,NFREQE+INSE+NLVEXZ-1
           II=INDLGZ(I-NFREQE-INSE+1)
           IF(RPOP0(II,ID).LT.POPZCH) GO TO 12
+            IF(ABS(CHANG(I,ID)).GT.CHMAX) njjp = njjp + 1
             IF(ABS(CHANG(I,ID)).LT.ABS(CHPOP)) GO TO 12
             CHpop=CHANG(I,ID)
             jjp=ii
@@ -23227,12 +23229,12 @@ C
 C     output onto file 9
 C
          IF(ID.EQ.ND.AND.ITER.EQ.1) WRITE(9,800)
-         WRITE(9,801) ITER,ID,cht,che,CHpop,CHrad,ch,jjp,jjr
+         WRITE(9,801) ITER,ID,cht,che,CHpop,CHrad,ch,jjp,jjr,njjp
 c        WRITE(19,802) (CHANG(NFREQE+I,ID),I=1,NN-NFREQE)
   800    FORMAT(' RELATIVE CHANGES OF VECTOR PSI'/
      *   '  ITER  ID    TEMP        NE       POP     RAD      MAXIMUM',
-     *   '   ilev   ifr',/)
-  801    FORMAT(2I5,1P5D10.2,2i5)
+     *   '  ilev  ifr  njjp',/)
+  801    FORMAT(2I5,1P5D10.2,3i5)
 c 802    FORMAT(10X,1P7D10.2)
    50 CONTINUE
 C
@@ -25324,14 +25326,15 @@ c
       if(it.ge.350) it=349
       t1=1000.*it
       t2=t1+1000.
-  998 format(i4,e9.3)
+C  998 format(i4,e9.3)
       if(ion.eq.4) then
+C        if(t.le.200000.) then
         if(t.le.200000.) then
           xu1=p4a(it-10)
           xu2=p4a(it-9)
         else
 C          write(*,*)'it=',it,' t=',t
-          WRITE(6,998) it, t
+C          WRITE(6,998) it, t
           write(*,*) 'it',it
           WRITE(10,*) it, t
           xu1=p4b(it-180)
