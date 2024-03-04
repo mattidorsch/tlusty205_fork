@@ -9,7 +9,7 @@ C
      *           MDEPTH =   50, ! max.num. of depth points
      *           MFREQ =350000, ! max.num. of frequency points
      *           MFREQP=620000,! working arrays of frequency
-     *           MFREQC = 2900, ! max.num. of freq.points in continuum
+     *           MFREQC = 5500, ! max.num. of freq.points in continuum
      *           MFREX  =   29, ! max.num. of linearized frequencies
      *           MFREQL =32000, ! max.num. of frequencies per line
      *           MTOT   =  593, ! max.num. of linearized parameters

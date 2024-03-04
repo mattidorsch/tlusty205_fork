@@ -14452,7 +14452,7 @@ C
          if(idisk.eq.0) then
          WRITE(6,612) ID,DM(ID),TROSS(ID),TEMP(ID),ELEC(ID),DENS(ID),P,
      *                FLTO,
-     *                flrd(id)/fltt,flxc(id)/fltt,flto/fltt
+     *                flrd(id)/fltt,flxc(id)/fltt,flto/fltt,GR
          else
          IF(ID.EQ.1) THEN
             GRV=QGRAV*ZD(ID)
@@ -14524,7 +14524,7 @@ c    *       'FH',4X,'LOG(FNU)',3X,'LOG(FLAM)'/)
   603 FORMAT(1H0,'TOTAL SURFACE FLUX',1PD15.8)
   611 FORMAT('1 ID    MASS',6X,'TAUROSS',5X,'TEMP',7X,'NE',9X,'DENS',
      *          8X,'P',6X,'TOT.FLUX',4x,'RAD/TOT',5x,'CON/TOT',
-     *          2x,'(RAD+CON)/TOT'/)
+     *          2x,'(RAD+CON)/TOT',1X, 'GR'/)
   612 FORMAT(1H ,I3,1P2D11.3,0PF10.1,1P6D11.3,3D13.5)
   613 FORMAT('1 ID    MASS',6X,'TAUROSS',5X,'TEMP',7X,'NE',
      *          5X,'TOT.RAD.FLUX. TOT.DISSIP.',4X,'Z',7X,
@@ -14765,6 +14765,7 @@ C
          DO 140 I=1,N
             DPSI(I)=BET(I,ID)-VECL(I)
             CHAN=0.
+C           relative changes; edit here
             IF(PSI0(I).GT.0.) CHAN=DPSI(I)/PSI0(I)
             BET(I,ID)=CHAN
 C
@@ -14820,6 +14821,7 @@ C
 
 C     print out the relative changes of vector PSI
 C
+C                 CHANG,CHM,CHMT
       CALL PRCHAN(BET,CHMX,CHMT)
 C
 C     STOP if changes become too large
@@ -23212,12 +23214,15 @@ C
             jjr=i
    11    CONTINUE
          END IF
+C        level populations
          DO 12 I=NFREQE+INSE,NFREQE+INSE+NLVEXZ-1
           II=INDLGZ(I-NFREQE-INSE+1)
           IF(RPOP0(II,ID).LT.POPZCH) GO TO 12
             IF(ABS(CHANG(I,ID)).GT.CHMAX) njjp = njjp + 1
             IF(ABS(CHANG(I,ID)).LT.ABS(CHPOP)) GO TO 12
+C           update max. change in level pop.
             CHpop=CHANG(I,ID)
+C           update index of level with max. change
             jjp=ii
    12    CONTINUE
          if(inre.gt.0) then

@@ -5,7 +5,7 @@
 c    *           MKULEV=       2,
 c    *           MLINE =       2,
 c    *           MCFE  =       2  )
-     *           MKULEV=    6900,
+     *           MKULEV=    7000,
      *           MLINE = 1800000,
      *           MCFE  =90900000 )
 C
