@@ -2,21 +2,21 @@ C
 C     Parameters that specify dimensions of arrays
 C
       PARAMETER (MATOM  =   99, ! max.num. of explicit atoms
-     *           MION   =   60, ! max.num. of explicit ions
-     *           MLEVEL = 1671, ! max.num. of explicit levels
-     *           MLVEXP =  647, ! max.num. of explicit linearized levels
+     *           MION   =   70, ! max.num. of explicit ions
+     *           MLEVEL = 1596, ! max.num. of explicit levels
+     *           MLVEXP =  572, ! max.num. of explicit linearized levels
      *           MTRANS =34000, ! max.num. of all transitions
      *           MDEPTH =   70, ! max.num. of depth points
-     *           MFREQ =400000, ! max.num. of frequency points
-     *           MFREQP=1034671,! working arrays of frequency
-     *           MFREQC = 5000, ! max.num. of freq.points in continuum
-     *           MFREX  =   24, ! max.num. of linearized frequencies
-     *           MFREQL =58000, ! max.num. of frequencies per line
-     *           MTOT   =  668, ! max.num. of linearized parameters
+     *           MFREQ =222432, ! max.num. of frequency points
+     *           MFREQP=570000,! working arrays of frequency
+     *           MFREQC = 4428, ! max.num. of freq.points in continuum
+     *           MFREX  =   29, ! max.num. of linearized frequencies
+     *           MFREQL =32000, ! max.num. of frequencies per line
+     *           MTOT   =  593, ! max.num. of linearized parameters
      *           MMU    =    3, ! max.num. of angle points
-     *           MFIT   =  250, ! max.num. of fit points (OP b-f c.s)
-     *           MITJ   =  270, ! max.num. of overlapping transitions
-     *           MMCDW  =   16, ! max.num. of levels with pseudocont.
+     *           MFIT   =  220, ! max.num. of fit points (OP b-f c.s)
+     *           MITJ   =  290, ! max.num. of overlapping transitions
+     *           MMCDW  =   19, ! max.num. of levels with pseudocont.
      *           MMER   =    2, ! max.num. of merged levels
      *           MVOIGT =  180, ! max.num. of lines with Voigt profile
      *           MZZ    =   10, ! maximum charge for occup.prob. ions

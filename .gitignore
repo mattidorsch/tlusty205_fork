@@ -1,2 +1,4 @@
 t205_fork
 *.dSYM
+data
+.DS_Store
