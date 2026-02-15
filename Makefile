@@ -9,3 +9,6 @@ endif
 
 all:
 	$(FC) $(FFLAGS) -o t205_fork tlusty205_fork.f90
+
+small:
+	$(FC) $(filter-out -mcmodel=medium,$(FFLAGS)) -o t205_fork tlusty205_fork.f90
