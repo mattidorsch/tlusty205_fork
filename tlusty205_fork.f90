@@ -1253,7 +1253,7 @@ C
       END IF
 C
 C  -----------------------------------------------------------
-C  Additional input parameters for "clasical" line transitions
+C  Additional input parameters for "classical" line transitions
 C   (i.e. those not represented by ODF's - ie ABS(MODE)=1)
 C  -----------------------------------------------------------
 C
@@ -2037,10 +2037,9 @@ C    Standard atomic constants for first 99 species
 C      Abundances for the first 30 from Grevesse & Sauval,
 C         (1998, Space Sci. Rev. 85, 161)
 C
-C            Element Atomic  Solar    Std.
-C                    weight abundance highest 
-C 
-C                                     ionization stage 
+C    Don't increase the ionization stage of heavy metals beyond 3.
+C            Element Atomic Solar     Std.
+C                    weight abundance highest ionization stage
       DATA D/ 1.008, 1.0D0, 2.,
      *        4.003, 1.00D-1, 3.,
      *        6.941, 1.26D-11, 3.,
@@ -2122,7 +2121,7 @@ C                                     ionization stage
      *       197.0 ,   6.76082952e-12  ,  3.,   
      *       200.6 ,   1.23026887e-11  ,  3.,   
      *       204.4 ,   6.60693440e-12  ,  3.,   
-     *       207.2 ,   1.12201834e-10  ,  3.,   
+     *       207.2 ,   1.12201834e-10  ,  7.,   
      *       209.0 ,   5.12861361e-12  ,  3.,   
      *       210.0 ,   1.00000000e-24  ,  3.,   
      *       211.0 ,   1.00000000e-24  ,  3.,   
@@ -2429,6 +2428,7 @@ C
             IF(I.EQ.8) IONIZ(I)=7
             IF(I.EQ.10) IONIZ(I)=9
             IF(I.EQ.26) IONIZ(I)=9
+C            IF(I.EQ.28) IONIZ(I)=9
          END IF
 C
          DO J=1,8
@@ -2696,6 +2696,9 @@ C
          QM=C1QM*Tinv/SQRT(T)*EXP(C2QM*Tinv)
          DQM=-QM*Tinv*(TRHA+C2QM*Tinv)
       END IF
+
+C      write(6,*) "state", Q, ENER, DQT, DQN
+
       RETURN
       END
 C
@@ -3144,8 +3147,10 @@ C
       INCLUDE 'INCLUDE/ATOMIC.FOR'
       INCLUDE 'INCLUDE/MODELQ.FOR'
       character*20 fnstd
-      dimension n0old(30,30),n1old(30,30)
-      dimension katold(2,30),vtbold(mdepth)
+C      dimension n0old(30,30),n1old(30,30)
+C      dimension katold(2,30),vtbold(mdepth)
+      dimension n0old(90,90),n1old(90,90)
+      dimension katold(2,90),vtbold(mdepth)
       COMMON POPUL0(MLEVEL,MDEPTH),POPULL(MLEVEL,MDEPTH),
      *       ESEMAT(MLEVEL,MLEVEL),BESE(MLEVEL),POPL(MLEVEL)
 C
@@ -5443,6 +5448,7 @@ C           NKH is NKA(IATH), ie. the level index corresponding to
 C           ionized hydrogen
 C
       RHS=QFIX(ID)+Q*(AN-ANE)/YTOT(ID)*ABUND(IATREF,ID)
+C      write(6,*) 'ELCOR RHS', RHS
       DO 30 IAT=1,NATOM
          IF(IIFIX(IAT).EQ.1) GO TO 30
          DO 20 I=N0A(IAT),NKA(IAT)
@@ -5455,6 +5461,7 @@ C
 C
 C     new electron density 
 C
+C      write(6,*) 'ELCOR RHS2', RHS
       RHS=HALF*(ANE+RHS)
       ELEC(ID)=RHS
       IF(IFIXDE.EQ.0) DENS(ID)=WMM(ID)*(AN-ELEC(ID))
@@ -5462,6 +5469,7 @@ C
       ANTO(ID)=ANMA(ID)+ELEC(ID)
       RELANE=(RHS-ANE)/ANE
       ANE=RHS
+C      write(6,*) 'ELCOR ANE', ANE
 C
 C     second part of the iteration loop - recalculation of all
 C     populations with new electron density
@@ -6145,11 +6153,11 @@ C
                RRD(ITR,ID)=RRD(ITR,ID)+SGW0*(RADRES+BNURES)*EHK(ID)
    10       CONTINUE
    20    CONTINUE
-C            
+C
 C        ----------------
-C        Line transitions 
+C        Line transitions
 C        ----------------
-C             
+C
          IF(ISPODF.EQ.0) THEN
          IF(IJLIN(IJ).GT.0) THEN
 C
@@ -11710,7 +11718,6 @@ C               state with protons
                 IC=IC-10
 
            ENDIF
-             
 
 C
 C ********* Collisional ionization
@@ -23607,7 +23614,7 @@ C
      *       CH1(66),  CH2(72),  CH3(55),  CH4(29),  CHION(222)
       REAL*4 ALF(678), GAM(678)
 C     INTEGER*2 II1(5,15),II2(5,15),INDEX0(5,30),
-      INTEGER   II1(5,15),II2(5,15),INDEX0(5,30),
+      INTEGER   II1(5,15),II2(5,15),INDEX0(5,90),
      *          IS1(53),IS2(70),IS(123),INDEXS(123),
      *          IM1(99),IM2(123),IM(222),INDEXM(222),
      *          IGP1(99),IGP2(123),IGPR(222),
@@ -24386,6 +24393,10 @@ c     SAVE ALF,GAM,XL,CHION,INDEX0,INDEXS,INDEXM,IGPR,IG0,ICOMP
 C
 C     Initialization of auxiliary arrays (executed only once)
 C
+
+C      write(6,*) IAT,IZI,T,ANE,XMAX,U,DUT,DUN
+C     IAT,IZI,T,ANE,XMAX,U,DUT,DUN
+
       IF(ICOMP.NE.0) GO TO 30
       IND=1
       DO 10 K=1,NIONS
@@ -24413,16 +24424,19 @@ C
             U=1.
             DUT=0.
             DUN=0.
+C            write(6,*) 'IAT.LT.IZI', IAT, IZI, U
             RETURN
          END IF
          IF(IAT.GT.8) THEN
             U=IGLE(IAT-IZI+1)
             DUT=0.
             DUN=0.
+C            write(6,*) 'IGLE', IAT, IZI, U
             RETURN
          END IF
          CALL PFCNO(IAT,IZI,T,ANE,U)
-         RETURN  
+C         write(6,*) 'PFCNO', IAT, IZI, U
+         RETURN
       END IF
 c
 c     Irwin partition functions by default
@@ -24431,6 +24445,7 @@ c
       if(izi.le.2) then
          call mpartf(iat,izi,0,t,u0,du0)
          u=u0
+C         write(6,*) 'mpartf', IAT, IZI, U
          return
       end if
       end if
@@ -24486,6 +24501,7 @@ C
       IF(U.LT.0.) U=IG0(I0)
       DUT=(2.302580293*THET*(SU2+SQ2)+QQ*SQQ-A*SQT)/T
       DUN=-QQ*SQQ/ANE
+C      write(6,*) 'tbh formula', IAT, IZI, U
       RETURN
 C
 C     constant value of partition function for some ions (even if
@@ -24494,21 +24510,25 @@ C
    60 U=-I0
       DUT=0.
       DUN=0.
+C      write(6,*) 'const', IAT, IZI, U
       RETURN
 C
 C     non-standard, user supplied formula
 C
    70 CALL PFSPEC(IAT,IZI,T,ANE,U,DUT,DUN)
+C      write(6,*) 'PFSPEC', IAT, IZI, U
       RETURN
 C
 C     Partition functions for Iron  (From Sparks and Fischel)
 C
   170 CALL PFFE(IZI,T,ANE,U,DUT,DUN)
+C      write(6,*) 'PFFE', IAT, IZI, U
       RETURN
 C
 C     Partition functions for Nickel (from Kurucz predicted levels)
 C
   171 CALL PFNI(IZI,T,U,DUT,DUN)
+C      write(6,*) 'PFNI', IAT, IZI, U
       RETURN
 C
 C     Opacity Project value
@@ -24516,6 +24536,7 @@ C
    80 call opfrac(iat,izi,t,ane,u,opfra)
       DUT=0.
       DUN=0.
+C      write(6,*) 'opfrac', IAT, IZI, U
       RETURN
 C
 C     Modified Kurucz partition functions for IAT > 30
@@ -24523,7 +24544,9 @@ C
    90 CALL PFHEAV(IAT,IZI,3,T,ANE,U)
       DUT=0.
       DUN=0.
+C      write(6,*) 'PFHEAV', IAT, IZI, U
       RETURN
+
       END
 
 C
@@ -24740,6 +24763,15 @@ C
          IF(IZI.EQ.7) U=1.
          IF(IZI.EQ.8) U=6.
          IF(IZI.EQ.9) U=9.
+         RETURN
+      END IF
+      IF(IAT.EQ.82) THEN
+         IF(IZI.EQ.4) U=1.
+         IF(IZI.EQ.5) U=2.
+         IF(IZI.EQ.6) U=4.
+         IF(IZI.EQ.7) U=3.
+         IF(IZI.EQ.8) U=1.
+         IF(IZI.EQ.9) U=1.
          RETURN
       END IF
 
@@ -25530,6 +25562,8 @@ c     electron densities, are stored in the array PFOP
 c
 C     Read is done in a loop over the OP species
 c
+C      WRITE(6,*) iat, ion
+
       fra=1.
       if(iat.gt.0) go to 50
       do 40 iatnum=1,28
@@ -34118,7 +34152,7 @@ C
 C     =================
 C
 C     Setup frequencies in opacity sampling mode
-C       
+C
       INCLUDE 'INCLUDE/IMPLIC.FOR'
       INCLUDE 'INCLUDE/BASICS.FOR'
       INCLUDE 'INCLUDE/ATOMIC.FOR'
@@ -34129,13 +34163,22 @@ C
       DIMENSION FRL0(MTRANS),FRL1(MTRANS),FRLC(5*MTRANS)
       DIMENSION IKC(5*MTRANS),ITKC(5*MTRANS),ITJNU(5*MTRANS)
       DIMENSION FLNU(2*MATOM+3),DLNU(2*MATOM+3),ILNU(2*MATOM+3)
-      DIMENSION XMASS(30)
+      DIMENSION XMASS(90)
       DATA XMASS/ 1.008, 4.003, 6.941, 9.012,10.810,12.011,14.007,
      &           16.000,18.918,20.179,22.990,24.305,26.982,28.086,
      &           30.974,32.060,35.453,39.948,39.098,40.080,44.956,
      &           47.900,50.941,51.996,54.938,55.847,58.933,58.700,
-     &           63.546,65.380/
-
+     &           63.546,65.380,
+     &           69.723,72.630,74.922,78.971,79.904,83.798,85.468,
+     &           87.620,88.906,91.224,92.906,95.95,97.000,101.07,
+     &           102.91,106.42,107.87,112.41,114.82,118.71,121.76,
+     &           127.60,126.90,131.29,132.91,137.33,137.33,138.91,
+     &           140.12,140.91,
+     &           144.24,145.00,150.36,151.96,99.000,99.000,99.000,
+     &           99.000,99.000,173.05,174.97,178.49,180.95,183.84,
+     &           186.21,190.23,192.22,195.08,196.97,200.59,204.38,
+     &           207.2,208.98,99.000,99.000,99.000,99.000,99.000,
+     &           99.000,99.000/
 C
       IF(TSNU.EQ.0.) TSNU=TEFF
       IF(VTNU.EQ.0.) VTNU=VTB
@@ -34605,8 +34648,9 @@ C
 C     first line of fort.10 in OS
       write(10,'(4A12)') "nfreq", "nfreqc", "nfreql", "nflx"
       write(10,'(4A12)') "->mfreq", "->mfreqc", "->mfreqp", "->mfreql"
-C      write(10,'(4I12)') nfreq,nfreqc,nfreql,nflx
       write(10,*) nfreq,nfreqc,nfreql,nflx
+C     flush to encourage writing the output instantly
+      flush(UNIT=10)
       IF(NFREQ.GT.MFREQ) THEN
          WRITE(10,1000) NFREQ
  1000    FORMAT(' Number of frequencies:',I10)

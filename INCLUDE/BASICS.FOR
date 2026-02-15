@@ -6,10 +6,10 @@ C
      *           MLEVEL = 1596, ! max.num. of explicit levels
      *           MLVEXP =  572, ! max.num. of explicit linearized levels
      *           MTRANS =34000, ! max.num. of all transitions
-     *           MDEPTH =   50, ! max.num. of depth points
-     *           MFREQ =350000, ! max.num. of frequency points
-     *           MFREQP=620000,! working arrays of frequency
-     *           MFREQC = 5500, ! max.num. of freq.points in continuum
+     *           MDEPTH =   70, ! max.num. of depth points
+     *           MFREQ =222432, ! max.num. of frequency points
+     *           MFREQP=570000,! working arrays of frequency
+     *           MFREQC = 4428, ! max.num. of freq.points in continuum
      *           MFREX  =   29, ! max.num. of linearized frequencies
      *           MFREQL =32000, ! max.num. of frequencies per line
      *           MTOT   =  593, ! max.num. of linearized parameters

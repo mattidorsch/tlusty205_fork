@@ -14,7 +14,7 @@ C
      *           MFREQL =81000, ! max.num. of frequencies per line
      *           MTOT   =  593, ! max.num. of linearized parameters
      *           MMU    =    3, ! max.num. of angle points
-     *           MFIT   =  220, ! max.num. of fit points (OP b-f c.s)
+     *           MFIT   =  250, ! max.num. of fit points (OP b-f c.s)
      *           MITJ   =  270, ! max.num. of overlapping transitions
      *           MMCDW  =   12, ! max.num. of levels with pseudocont.
      *           MMER   =    2, ! max.num. of merged levels
