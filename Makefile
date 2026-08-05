@@ -12,3 +12,21 @@ all:
 
 small:
 	$(FC) $(filter-out -mcmodel=medium,$(FFLAGS)) -o t205_fork tlusty205_fork.f90
+
+# Variant builds, e.g. "make sdOstar2020" -> t205_sdOstar2020.
+# gfortran resolves INCLUDE relative to the source file, so each variant is
+# compiled from a symlink next to its own INCLUDE/, where INCLUDE/<variant>/
+# overrides BASICS.FOR and ODFPAR.FOR and the remaining files are shared.
+VARIANTS = sdOstar2020 sdO_full
+
+$(VARIANTS): %: tlusty205_fork.f90 INCLUDE/%/BASICS.FOR INCLUDE/%/ODFPAR.FOR
+	mkdir -p build/$@/INCLUDE
+	ln -sf $(CURDIR)/INCLUDE/*.FOR build/$@/INCLUDE/
+	ln -sf $(CURDIR)/INCLUDE/$@/*.FOR build/$@/INCLUDE/
+	ln -sf $(CURDIR)/tlusty205_fork.f90 build/$@/tlusty205_fork.f90
+	$(FC) $(FFLAGS) -o t205_$@ build/$@/tlusty205_fork.f90
+
+clean:
+	rm -rf build t205_fork $(addprefix t205_,$(VARIANTS))
+
+.PHONY: all small clean $(VARIANTS)

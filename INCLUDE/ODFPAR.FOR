@@ -7,7 +7,7 @@ c    *           MLINE =       2,
 c    *           MCFE  =       2  )
      *           MKULEV=    7000,
      *           MLINE = 1500000,
-     *           MCFE  =25000000 )
+     *           MCFE  =90900000 )
 C
       REAL*4 SIGFE
 C

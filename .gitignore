@@ -1,4 +1,7 @@
 t205_fork
+t205_sdOstar2020
+t205_sdO_full
+build/
 *.dSYM
 data
 .DS_Store

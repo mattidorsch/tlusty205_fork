@@ -30069,6 +30069,8 @@ c
       character*(*) text
       write(6,10) text,i1,i2
       write(10,10) text,i1,i2
+      flush(UNIT=6)
+      flush(UNIT=10)
    10 format(1x,a,2x,2i10)
       stop
       end
@@ -34411,6 +34413,8 @@ C
             IF(IKNU.EQ.0) XFRB=DLOG(1.000001*FRLC(IKC(IL)))
             NFS=INT((XFRA-XFRB)/DXNU)+1
             XFS0=(XFRA-XFRB)/FLOAT(NFS)
+            IF(NFREQ+NFS+1.GT.MFREQ)
+     *         CALL QUIT('nfreq.gt.mfreq - INIFRS',NFREQ+NFS+1,MFREQ)
             DO IJ=NFREQ+1,NFREQ+NFS
                XFR=DLOG(FREQ(IJ-1))-XFS0
                FREQ(IJ)=EXP(XFR)
@@ -34455,6 +34459,8 @@ C
           ELSE IF(XFRA.EQ.XFRB) THEN
             IKNU=ITJNU(IKC(IL))
             IF(IKNU.EQ.0) THEN
+               IF(NFREQ+1.GT.MFREQ)
+     *            CALL QUIT('nfreq.gt.mfreq - INIFRS',NFREQ+1,MFREQ)
                FREQ(NFREQ)=1.000001*FRLC(IKC(IL))
                FREQ(NFREQ+1)=0.999999*FRLC(IKC(IL))
                IFR0(ITR)=1
@@ -34509,6 +34515,8 @@ C
          DXNU=DLNU(NNU-1)
          NFS=INT((XFRA-XFRB)/DXNU)+1
          XFS0=(XFRA-XFRB)/FLOAT(NFS)
+         IF(NFREQ+NFS.GT.MFREQ)
+     *      CALL QUIT('nfreq.gt.mfreq - INIFRS',NFREQ+NFS,MFREQ)
          DO IJ=NFREQ+1,NFREQ+NFS
             XFR=DLOG(FREQ(IJ-1))-XFS0
             FREQ(IJ)=EXP(XFR)
@@ -34547,10 +34555,14 @@ C
             IF(IFREQB(NFREQC).LT.IB1) THEN
                IF(NLINES(IB1).EQ.0 .AND. ISPODF.GT.1) THEN
                   NFREQC=NFREQC+1
+                  IF(NFREQC.GT.MFREQC)
+     *            CALL QUIT('nfreqc.gt.mfreqc - INIFRS',NFREQC,MFREQC)
                   IFREQB(NFREQC)=IB1
                   XFRA=XFRB
                 ELSE IF((XFRA-XFRB).GT.DLNU(NUB)) THEN
                   NFREQC=NFREQC+1
+                  IF(NFREQC.GT.MFREQC)
+     *            CALL QUIT('nfreqc.gt.mfreqc - INIFRS',NFREQC,MFREQC)
                   IFREQB(NFREQC)=IB1
                   XFRA=XFRB
                END IF
@@ -34563,10 +34575,14 @@ C
          END IF
          IF(IFREQB(NFREQC).LT.(IB1-1)) THEN
             NFREQC=NFREQC+1
-           IFREQB(NFREQC)=IB1-1
+            IF(NFREQC.GT.MFREQC)
+     *         CALL QUIT('nfreqc.gt.mfreqc - INIFRS',NFREQC,MFREQC)
+            IFREQB(NFREQC)=IB1-1
          END IF
          IF(IFREQB(NFREQC).LT.IB1) THEN
             NFREQC=NFREQC+1
+            IF(NFREQC.GT.MFREQC)
+     *         CALL QUIT('nfreqc.gt.mfreqc - INIFRS',NFREQC,MFREQC)
             IFREQB(NFREQC)=IB1
          END IF
          XFRA=DLOG(FREQ(IB1))
@@ -34577,6 +34593,8 @@ C
 C
       IF(IFREQB(NFREQC).LT.NFREQ) THEN
          NFREQC=NFREQC+1
+         IF(NFREQC.GT.MFREQC)
+     *      CALL QUIT('nfreqc.gt.mfreqc - INIFRS',NFREQC,MFREQC)
          IFREQB(NFREQC)=NFREQ
       END IF
 C
@@ -35925,18 +35943,24 @@ C
                  NLT=NLT+1
                  FRL=CAS/WAVE(K)
                  IJL=NINT((XFRMA-DLOG(FRL))/DXNU)+NFRS1
+                 IF(IJL.LT.2 .OR. IJL.GE.MFREQ)
+     *           CALL QUIT(' ijl outside FREQ - IROSET',IJL,MFREQ)
                  D0=ABS((FREQ(IJL)-FRL)/(FREQ(IJL)-FREQ(IJL+1)))
                  IF(D0.GT.HALF) THEN
                     DO WHILE(FRL.GT.FREQ(IJL))
                        IJL=IJL-1
+                       IF(IJL.LT.2)
+     *              CALL QUIT(' ijl outside FREQ - IROSET',IJL,MFREQ)
                     END DO
                     DO WHILE(FRL.LT.FREQ(IJL))
                        IJL=IJL+1
+                       IF(IJL.GE.MFREQ)
+     *              CALL QUIT(' ijl outside FREQ - IROSET',IJL,MFREQ)
                     END DO
                     D1=FRL-FREQ(IJL)
                     D2=FREQ(IJL-1)-FRL
                     IF(D2.LT.D1) IJL=IJL-1
-                 END IF  
+                 END IF
                  IJ0=IJL-IJD
                  IJ1=IJL+IJD
                  IF(IJ0.LT.1) IJ0=1
@@ -35965,6 +35989,10 @@ C
                  IFR1(ITR)=IFRKU+NFT-1
                  KFR0(ITR)=NFTT+1
                  KFR1(ITR)=NFTT+NFT
+                 IF(KFR1(ITR).GT.MCFE)
+     *           CALL QUIT(' Too many Fe cross-sect. to store'//
+     *                     ' - raise MCFE in ODFPAR.FOR',
+     *                     KFR1(ITR),MCFE)
                  NFTT=NFTT+NFT
                  if(iprint.ge.4)
      *           write(6,611) itr,ifr0(itr),ifr1(itr),
@@ -35977,12 +36005,6 @@ C
                        SIGFE(I,KJ)=real(sxx)
                     END DO
                  END DO
-              END IF
-              IF(KJ.GT.MCFE) THEN
-                 CALL QUIT(' Too many Fe cross-sect. to store',
-     *                     KJ,MCFE)
-C                don't need to write fort.41 for grid
-                 WRITE(41,313) IL,IU,W1,W2,IFRKU,NFT,NLT,OSC0(ITR)
               END IF
               IF(NFT.GT.NFTMX) NFTMX=NFT
            END DO
@@ -36088,6 +36110,12 @@ C
       READ(IUN1,170) NLINKU,KEVE,KODD
       IF(KEVE+KODD.GT.15000)
      &   CALL QUIT(' Too many levels in Kurucz file',keve,kodd)
+      IF(KEVE.GT.MKULEV)
+     &   CALL QUIT(' keve.gt.mkulev - raise MKULEV in ODFPAR.FOR',
+     &             KEVE,MKULEV)
+      IF(KODD.GT.MKULEV)
+     &   CALL QUIT(' kodd.gt.mkulev - raise MKULEV in ODFPAR.FOR',
+     &             KODD,MKULEV)
 C
 C     Even parity
 C
@@ -36348,6 +36376,12 @@ C
       IUN2=32
       OPEN(IUN2,FILE=FIODF2(ION),STATUS='OLD')
    10 READ(IUN2,180,ERR=20,END=20) WA,GFR,JEVR,JODR,IFPLI
+      IF(JEVR.LT.1 .OR. JEVR.GT.KEVE)
+     &   CALL QUIT(' Bad even level index in Kurucz line file',
+     &             JEVR,KEVE)
+      IF(JODR.LT.1 .OR. JODR.GT.KODD)
+     &   CALL QUIT(' Bad odd level index in Kurucz line file',
+     &             JODR,KODD)
       GF=EXP(TENLG*GFR)
       IF(WA.GT.WMAX) GO TO 11
       IF(WA.LT.WMIN) GO TO 11
@@ -36360,6 +36394,9 @@ C
       if(jidn.gt.3) XLSTR=XION*GF*EXP(-E00*8./E0)
       IF(XLSTR.LT.STRLX) GO TO 10
       NLINKU=NLINKU+1
+      IF(NLINKU.GT.MLINE)
+     &   CALL QUIT(' nlinku.gt.mline - raise MLINE in ODFPAR.FOR',
+     &             NLINKU,MLINE)
       WAVE(NLINKU)=WA*TEN
       JTR(NLINKU,1)=JEVR
       JTR(NLINKU,2)=JODR
