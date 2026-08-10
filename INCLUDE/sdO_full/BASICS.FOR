@@ -2,21 +2,21 @@ C
 C     Parameters that specify dimensions of arrays
 C
       PARAMETER (MATOM  =   99, ! max.num. of explicit atoms
-     *           MION   =   60, ! max.num. of explicit ions
+     *           MION   =   70, ! max.num. of explicit ions
      *           MLEVEL = 1596, ! max.num. of explicit levels
      *           MLVEXP =  572, ! max.num. of explicit linearized levels
      *           MTRANS =34000, ! max.num. of all transitions
      *           MDEPTH =   70, ! max.num. of depth points
-     *           MFREQ =550000, ! max.num. of frequency points
-     *           MFREQP=1450000,! working arrays of frequency
-     *           MFREQC = 4250, ! max.num. of freq.points in continuum
-     *           MFREX  =   24, ! max.num. of linearized frequencies
-     *           MFREQL =81000, ! max.num. of frequencies per line
+     *           MFREQ =332432, ! max.num. of frequency points
+     *           MFREQP=690000,! working arrays of frequency
+     *           MFREQC = 4428, ! max.num. of freq.points in continuum
+     *           MFREX  =   29, ! max.num. of linearized frequencies
+     *           MFREQL =28000, ! max.num. of frequencies per line
      *           MTOT   =  593, ! max.num. of linearized parameters
      *           MMU    =    3, ! max.num. of angle points
-     *           MFIT   =  250, ! max.num. of fit points (OP b-f c.s)
-     *           MITJ   =  270, ! max.num. of overlapping transitions
-     *           MMCDW  =   12, ! max.num. of levels with pseudocont.
+     *           MFIT   =  349, ! max.num. of fit points (OP b-f c.s)
+     *           MITJ   =  290, ! max.num. of overlapping transitions
+     *           MMCDW  =   19, ! max.num. of levels with pseudocont.
      *           MMER   =    2, ! max.num. of merged levels
      *           MVOIGT =  180, ! max.num. of lines with Voigt profile
      *           MZZ    =   10, ! maximum charge for occup.prob. ions
