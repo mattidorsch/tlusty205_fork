@@ -33,7 +33,9 @@ c    *           MFRTAB =    1, ! max.num. of freqeuncies in opac.table
      *           MMUC   =    2, ! max.num. of angle points (Compton)
      *           MLEVE3 =    1, ! =1 for diag.prec; =MLEVEL for trid.prec.
      *           MLVEX3 =    1, ! =1 for diag.oper.; =MLVEXP for tridiag.   .
-     *           MTRAN3 =    1) ! =1 for diag.oper; =MTRANS for tridiag.
+     *           MTRAN3 =    1, ! =1 for diag.oper; =MTRANS for tridiag.
+     *           MITRK  =    2, ! kind of ITRLIN; 2 packs, 4 lifts MTRMAX
+     *           MTRMAX =32767) ! max.num. of transitions ITRLIN can index
 C
 C     Basic physical constants
 C

@@ -7,7 +7,7 @@ c    *           MHWL   = 65)
       parameter (mfhtab=1000,
      *           mtabth=10,
      *           mtabeh=10)
-      INTEGER*2 ITRLIN
+      INTEGER(KIND=MITRK) ITRLIN
       REAL*4 PRFLIN,BFCS
       real*8 absopac(mtabt,mtabr,mfrtab)
 C

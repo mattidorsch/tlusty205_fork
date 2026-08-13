@@ -1,6 +1,5 @@
-t205_fork
-t205_sdOstar2020
-t205_sdO_full
+# Every build product, whatever the variant is called.
+t205*
 build/
 *.dSYM
 data

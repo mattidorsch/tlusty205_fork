@@ -519,9 +519,9 @@ C
       if(nion.gt.mion) CALL QUIT('nion.gt.mion',nion,mion)
       if(ibfint.eq.0.and.nfreq.gt.mfreqc)
      *   CALL QUIT('nfreq.gt.mfreqc for ibfint.eq.0',nfreq,mfreqc)
-      if(ntrans.gt.32767)
-     * call quit(' Too many transitions to define ITRLIN as INTEGER*2',
-     *             ntrans,ntrans)
+      if(ntrans.gt.mtrmax)
+     * call quit(' ntrans.gt.mtrmax; raise MITRK to 4 in BASICS.FOR',
+     *             ntrans,mtrmax)
       nncdw=0
       do ibft=1,ntranc
           itr=itrbf(ibft)
@@ -889,9 +889,9 @@ C
       if(nn.gt.mtot) CALL QUIT('nn.gt.mtot',nn,mtot)
       if(nlambd.gt.mlambd) CALL QUIT('nlambd.gt.mlambd',nlambd,mlambd)
       if(nhod.gt.mhod) CALL QUIT('nhod.gt.mhod',nhod,mhod)
-      if(ntrans.gt.32767)
-     * call quit(' Too many transitions to define ITRLIN as INTEGER*2',
-     *            ntrans,ntrans)
+      if(ntrans.gt.mtrmax)
+     * call quit(' ntrans.gt.mtrmax; raise MITRK to 4 in BASICS.FOR',
+     *             ntrans,mtrmax)
 C
 C  -----------------------------------------------------------
 C     calculate the input LTE-grey model, if needed
@@ -31335,7 +31335,7 @@ C
          IF(LINEXP(IT)) GO TO 10
          DO IJ=MAX(IFR0(IT),1),IFR1(IT)
             NLINES(IJ)=NLINES(IJ)+1
-            ITRLIN(NLINES(IJ),IJ)=int2(IT)
+            ITRLIN(NLINES(IJ),IJ)=IT
          END DO
    10 CONTINUE
       DO IJ=1,NFREQ
@@ -33910,7 +33910,7 @@ C
             IF(NLINES(IJ).GT.MITJ)
      *      CALL QUIT('Too many overlappins-nlines(ij).gt.mitj',
      *      nlines(ij),mitj)
-            ITRLIN(NLINES(IJ),IJ)=int2(IT)
+            ITRLIN(NLINES(IJ),IJ)=IT
    50    CONTINUE
          IF(NLINES(IJ).GT.NLIMAX) NLIMAX=NLINES(IJ)
    40 CONTINUE
@@ -35561,7 +35561,7 @@ C
             IF(NLINES(IJ).GT.MITJ)
      *      CALL QUIT('Too many overlappins-nlines(ij).gt.mitj',
      *      nlines(ij),mitj)
-            ITRLIN(NLINES(IJ),IJ)=int2(IT)
+            ITRLIN(NLINES(IJ),IJ)=IT
    50    CONTINUE
          IF(NLINES(IJ).GT.NLIMAX) NLIMAX=NLINES(IJ)
    40 CONTINUE
@@ -36373,8 +36373,8 @@ C
       PARAMETER (BOLCM=1.D8/HK/CAS,CCOR=0.09,SIXTH=UN/6.,GES=0.05)
       DIMENSION GWE(MDEPTH,MLEVEL,2),GWB(MDEPTH,MLEVEL,2),AA(MDEPTH)
       DIMENSION E0FE(10),E0NI(10),E0CR(10)
-      COMMON/COLKUR/OMES(100,100),EKU(15000),GKU(15000),GST,
-     &              KKU(15000)
+      COMMON/COLKUR/OMES(100,100),EKU(20000),GKU(20000),GST,
+     &              KKU(20000)
       
       DATA E0FE/63480.,130563.,247220.,442000.,605000.,799000.,
      &            1008000.,1218380.,1884000.,2114000./
@@ -36431,7 +36431,7 @@ C
       IUN1=31
       OPEN(IUN1,FILE=FIODF1(ION),STATUS='OLD')
       READ(IUN1,170) NLINKU,KEVE,KODD
-      IF(KEVE+KODD.GT.15000)
+      IF(KEVE+KODD.GT.20000)
      &   CALL QUIT(' Too many levels in Kurucz file',keve,kodd)
       IF(KEVE.GT.MKULEV)
      &   CALL QUIT(' keve.gt.mkulev - raise MKULEV in ODFPAR.FOR',
@@ -36650,8 +36650,8 @@ C
      *           EXPIC3=25.6329561486,EXPIC4=9.5733223454)
       DIMENSION E0FE(10),E0NI(10),E0CR(10)
       DIMENSION VT0(MDEPTH),GT0(MDEPTH)
-      COMMON/COLKUR/OMES(100,100),EKU(15000),GKU(15000),GST,
-     &              KKU(15000)
+      COMMON/COLKUR/OMES(100,100),EKU(20000),GKU(20000),GST,
+     &              KKU(20000)
       COMMON/LINED/WAVE(MLINE),VDOP(MLINE,MDODF),
      &             AGAM(MLINE,MDODF),SIG0(MLINE,MDODF),
      &             JTR(MLINE,2)

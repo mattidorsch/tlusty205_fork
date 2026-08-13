@@ -13,11 +13,15 @@ all:
 small:
 	$(FC) $(filter-out -mcmodel=medium,$(FFLAGS)) -o t205_fork tlusty205_fork.f90
 
-# Variant builds, e.g. "make sdOstar2020" -> t205_sdOstar2020.
+# Variant builds, e.g. "make O70_d4_low" -> t205_O70_d4_low.
 # gfortran resolves INCLUDE relative to the source file, so each variant is
 # compiled from a symlink next to its own INCLUDE/, where INCLUDE/<variant>/
 # overrides BASICS.FOR and ODFPAR.FOR and the remaining files are shared.
-VARIANTS = sdOstar2020 sdO_full
+#
+# Named <type><ND>_d<DDNU>_<levels>: the spectral type it was dimensioned for,
+# the depth points, the DDNU its frequency bounds assume, and how many ion
+# levels fit (low, mid, high, vhigh).
+VARIANTS = sdOstar2020 sdO_full O70_d4_vhigh O70_d4_low O70_d0.75_low
 
 $(VARIANTS): %: tlusty205_fork.f90 INCLUDE/%/BASICS.FOR INCLUDE/%/ODFPAR.FOR
 	mkdir -p build/$@/INCLUDE

@@ -3,19 +3,19 @@ C     Parameters that specify dimensions of arrays
 C
       PARAMETER (MATOM  =   99, ! max.num. of explicit atoms
      *           MION   =   70, ! max.num. of explicit ions
-     *           MLEVEL = 1596, ! max.num. of explicit levels
+     *           MLEVEL = 2400, ! max.num. of explicit levels
      *           MLVEXP =  572, ! max.num. of explicit linearized levels
-     *           MTRANS =34000, ! max.num. of all transitions
-     *           MDEPTH =   50, ! max.num. of depth points
-     *           MFREQ =350000, ! max.num. of frequency points
-     *           MFREQP=620000,! working arrays of frequency
-     *           MFREQC = 5500, ! max.num. of freq.points in continuum
+     *           MTRANS =50000, ! max.num. of all transitions
+     *           MDEPTH =   70, ! max.num. of depth points
+     *           MFREQ =332432, ! max.num. of frequency points
+     *           MFREQP=690000,! working arrays of frequency
+     *           MFREQC = 8000, ! max.num. of freq.points in continuum
      *           MFREX  =   29, ! max.num. of linearized frequencies
-     *           MFREQL =32000, ! max.num. of frequencies per line
+     *           MFREQL =28000, ! max.num. of frequencies per line
      *           MTOT   =  593, ! max.num. of linearized parameters
      *           MMU    =    3, ! max.num. of angle points
-     *           MFIT   =  220, ! max.num. of fit points (OP b-f c.s)
-     *           MITJ   =  290, ! max.num. of overlapping transitions
+     *           MFIT   =  349, ! max.num. of fit points (OP b-f c.s)
+     *           MITJ   =  450, ! max.num. of overlapping transitions
      *           MMCDW  =   19, ! max.num. of levels with pseudocont.
      *           MMER   =    2, ! max.num. of merged levels
      *           MVOIGT =  180, ! max.num. of lines with Voigt profile
@@ -34,8 +34,8 @@ c    *           MFRTAB =    1, ! max.num. of freqeuncies in opac.table
      *           MLEVE3 =    1, ! =1 for diag.prec; =MLEVEL for trid.prec.
      *           MLVEX3 =    1, ! =1 for diag.oper.; =MLVEXP for tridiag.   .
      *           MTRAN3 =    1, ! =1 for diag.oper; =MTRANS for tridiag.
-     *           MITRK  =    2, ! kind of ITRLIN; 2 packs, 4 lifts MTRMAX
-     *           MTRMAX =32767) ! max.num. of transitions ITRLIN can index
+     *           MITRK  =    4, ! kind of ITRLIN; 2 packs, 4 lifts MTRMAX
+     *           MTRMAX =MTRANS) ! max.num. of transitions ITRLIN can index
 C
 C     Basic physical constants
 C
