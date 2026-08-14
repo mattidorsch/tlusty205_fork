@@ -34986,10 +34986,15 @@ C
       END DO
       NPPX=NFREQ
 C
-C     first line of fort.10 in OS
+C     first line of fort.10 in OS; the value is followed by the parameter it
+C     is checked against and that parameter's compiled-in limit, so a fort.10
+C     says on its own how much room the binary that wrote it had left.
+C     Note nfreql is bounded by MFREQP, not by MFREQL: MFREQL bounds nflx,
+C     the largest number of frequencies in any single line.
       write(10,'(4A12)') "nfreq", "nfreqc", "nfreql", "nflx"
       write(10,'(4A12)') "->mfreq", "->mfreqc", "->mfreqp", "->mfreql"
       write(10,*) nfreq,nfreqc,nfreql,nflx
+      write(10,'(4I12)') mfreq,mfreqc,mfreqp,mfreql
 C     flush to encourage writing the output instantly
       flush(UNIT=10)
       IF(NFREQ.GT.MFREQ) THEN
