@@ -107,3 +107,10 @@ c
       common/comite/ncfor1,ncfor2,nccoup,ncitot,ncfull
       common/mlcons/aconml,bconml,cconml
       common/taursl/taurs(mdepth)
+c
+c     Peak counters that the routine computing them keeps as a local, copied
+c     here so ARRUSE can report them against their limit. Set to -1 in INITIA;
+c     a counter still -1 was never reached on this model.
+c
+      common/arrmax/muflx,mulitj,muftmx,muhod,mudodf,mufodf,
+     *              muvoig,mumcdw,mufit,mulitot
