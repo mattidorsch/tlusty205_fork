@@ -166,6 +166,20 @@ C
       DATA IGNI/2,1,2,1,6,9,4,9,6,1,2,1,6,9,4,9,6,1,
      *          10,21,28,25,6,25,28,21,10,21/
 C
+C     Peak array use is reported by ARRUSE; -1 marks a counter this model
+C     never reached, which is not the same as reaching zero.
+C
+      MUFLX =-1
+      MULITJ=-1
+      MUFTMX=-1
+      MUHOD =-1
+      MUDODF=-1
+      MUFODF=-1
+      MUVOIG=-1
+      MUMCDW=-1
+      MUFIT =-1
+      MULITOT=-1
+C
 C ----------------------
 C Basic input parameters
 C ----------------------
@@ -530,6 +544,7 @@ C
       end do
       if(nncdw.gt.mmcdw) call quit('Too many pseudo-continua',
      *                             nncdw, mmcdw)
+      mumcdw=nncdw
 c
 C  -----------------------------------------------------------
 C     read the input model
@@ -889,6 +904,7 @@ C
       if(nn.gt.mtot) CALL QUIT('nn.gt.mtot',nn,mtot)
       if(nlambd.gt.mlambd) CALL QUIT('nlambd.gt.mlambd',nlambd,mlambd)
       if(nhod.gt.mhod) CALL QUIT('nhod.gt.mhod',nhod,mhod)
+      muhod=nhod
       if(ntrans.gt.mtrmax)
      * call quit(' ntrans.gt.mtrmax; raise MITRK to 4 in BASICS.FOR',
      *             ntrans,mtrmax)
@@ -1115,6 +1131,7 @@ C
       IF(IFANCY.GT.100) THEN
          NFIT=IFANCY-100
          IF(NFIT.GT.MFIT) CALL QUIT('nfit.gt.mfit',nfit,mfit)
+         IF(NFIT.GT.MUFIT) MUFIT=NFIT
          READ(IUNIT,*) (XTOP(IFIT,IC),IFIT=1,NFIT)
          READ(IUNIT,*) (CTOP(IFIT,IC),IFIT=1,NFIT)
       END IF
@@ -1301,6 +1318,7 @@ C
       IF(IABS(IPROF(ITR)).EQ.1) THEN
        IP=IP+1
          if(ip.gt.mvoigt) CALL QUIT('ip.gt.mvoigt',ip,mvoigt)
+         muvoig=ip
          ITRA(JJ,II)=IP
       END IF
       if(ion.eq.ielh) then
@@ -1890,9 +1908,11 @@ C     Outdated options (or options not yet implemented
 C                       for distributed processing!)
 C
       IF(ISPODF.GE.1) THEN
-         IF(IFPREC.EQ.0) 
-     *   CALL QUIT('inconsistent ispodf and ipfrec',ispodf,ifprec) 
+         IF(IFPREC.EQ.0)
+     *   CALL QUIT('inconsistent ispodf and ipfrec',ispodf,ifprec)
       END IF
+C
+      CALL ARRUSE
 C
       RETURN
       END
@@ -30402,6 +30422,106 @@ C
 C ********************************************************************
 C
 C
+      SUBROUTINE ARRUSE
+C     =================
+C
+C     Report array use to fort.10: one line per bound, giving the value this
+C     model reached and the limit compiled into the binary. Called from
+C     NSTOUT, after every setup routine, so a model that dies later still
+C     leaves a record of how much room it had.
+C
+C     A dash in the value column means the routine that counts it never ran on
+C     this model, which is not the same as it counting zero; a dash in the
+C     limit column means the counter has no compiled-in bound of its own.
+C     Counters checked inside the iteration (MCROSS, MTRMAX) are not here:
+C     they have no final value at this point.
+C
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      INCLUDE 'INCLUDE/BASICS.FOR'
+      INCLUDE 'INCLUDE/ATOMIC.FOR'
+      INCLUDE 'INCLUDE/MODELQ.FOR'
+      INCLUDE 'INCLUDE/ITERAT.FOR'
+      INCLUDE 'INCLUDE/ODFPAR.FOR'
+C
+      WRITE(10,10)
+      CALL ARRUS1('natom ','matom     ',NATOM ,MATOM )
+      CALL ARRUS1('nion  ','mion      ',NION  ,MION  )
+      CALL ARRUS1('nlevel','mlevel    ',NLEVEL,MLEVEL)
+      CALL ARRUS1('nlvexp','mlvexp    ',NLVEXP,MLVEXP)
+      CALL ARRUS1('ntrans','mtrans    ',NTRANS,MTRANS)
+      CALL ARRUS1('nd    ','mdepth    ',ND    ,MDEPTH)
+      CALL ARRUS1('nn    ','mtot      ',NN    ,MTOT  )
+      CALL ARRUS1('nmu   ','mmu       ',NMU   ,MMU   )
+      CALL ARRUS1('nlambd','mlambd    ',NLAMBD,MLAMBD)
+      CALL ARRUS1('nfreq ','mfreq     ',NFREQ ,MFREQ )
+      CALL ARRUS1('nfreqc','mfreqc    ',NFREQC,MFREQC)
+      CALL ARRUS1('nfreqe','mfrex     ',NFREQE,MFREX )
+      CALL ARRUS1('nfreql','mfreqp    ',NFREQL,MFREQP)
+      CALL ARRUS1('nflx  ','mfreql    ',MUFLX ,MFREQL)
+      CALL ARRUS1('nlines','mitj      ',MULITJ,MITJ  )
+      CALL ARRUS1('nfit  ','mfit      ',MUFIT ,MFIT  )
+      CALL ARRUS1('ipvoig','mvoigt    ',MUVOIG,MVOIGT)
+      CALL ARRUS1('nncdw ','mmcdw     ',MUMCDW,MMCDW )
+      CALL ARRUS1('nhod  ','mhod      ',MUHOD ,MHOD  )
+      CALL ARRUS1('ndodf ','mdodf     ',MUDODF,MDODF )
+      CALL ARRUS1('nfro  ','mfodf     ',MUFODF,MFODF )
+      CALL ARRUS1('nftt  ','mcfe      ',NFTT  ,MCFE  )
+      CALL ARRUS1('nlinku','mline     ',NLINKU,MLINE )
+      CALL ARRUS1('keve  ','mkulev    ',KEVE  ,MKULEV)
+      CALL ARRUS1('kodd  ','mkulev    ',KODD  ,MKULEV)
+C
+C     NFT has no bound of its own; it is limited through MCFE, already above.
+C     The overlaps fill ITRLIN(MITJ,NFREQ), so their total is bounded by the
+C     product, computed in double to keep a wide grid from overflowing it.
+C
+      NLILIM=-1
+      XLITJ=DBLE(MITJ)*DBLE(NFREQ)
+      IF(XLITJ.LT.2.0D9) NLILIM=INT(XLITJ)
+      CALL ARRUS1('nftmx ','-         ',MUFTMX ,-1)
+      CALL ARRUS1('nlitot','mitj*nfreq',MULITOT,NLILIM)
+      WRITE(10,20)
+      FLUSH(UNIT=10)
+   10 FORMAT(' ARRAY USE'/' name   bound     ',
+     *       '       value','       limit','    pct')
+   20 FORMAT(' END ARRAY USE')
+      RETURN
+      END
+C
+C
+C ********************************************************************
+C
+C
+      SUBROUTINE ARRUS1(NAMN,NAMM,IVAL,ILIM)
+C     ======================================
+C
+C     One array-use line. A negative IVAL marks a counter this model never
+C     reached and a negative ILIM one with no bound of its own; either is
+C     written as a dash, so neither can be read as a number.
+C
+      INCLUDE 'INCLUDE/IMPLIC.FOR'
+      CHARACTER*6 NAMN
+      CHARACTER*10 NAMM
+      CHARACTER*12 CVAL,CLIM
+      CHARACTER*7 CPCT
+C
+      CVAL='           -'
+      CLIM=CVAL
+      CPCT='      -'
+      IF(IVAL.GE.0) WRITE(CVAL,10) IVAL
+      IF(ILIM.GE.0) WRITE(CLIM,10) ILIM
+      IF(IVAL.GE.0 .AND. ILIM.GT.0)
+     *   WRITE(CPCT,20) 100.D0*DBLE(IVAL)/DBLE(ILIM)
+      WRITE(10,30) NAMN,NAMM,CVAL,CLIM,CPCT
+   10 FORMAT(I12)
+   20 FORMAT(F7.1)
+   30 FORMAT(1X,A6,1X,A10,A12,A12,A7)
+      RETURN
+      END
+C
+C
+C ********************************************************************
+C
+C
       SUBROUTINE ODFSET
 C     =================
 C
@@ -30438,6 +30558,7 @@ C
          IF(NDODF.GT.MDODF) 
      *   CALL QUIT('too many depths for an ODF - ndodf.gt.mdodf',
      *             ndodf,mdodf)
+         IF(NDODF.GT.MUDODF) MUDODF=NDODF
          READ(IND,*) (IDODF(ID),ID=1,NDODF)
          IREC=0
    10    CONTINUE
@@ -30445,6 +30566,7 @@ C
          IF(NFRO.GT.MFODF) 
      *   CALL QUIT('too many frequencies for an ODF - nfro.gt.mfodf',
      *             nfro,mfodf)
+         IF(NFRO.GT.MUFODF) MUFODF=NFRO
          DO IJ=1,NFRO
             READ(IND,*) OFR(IJ),OW(IJ),OWSUB(IJ)
          END DO
@@ -31344,9 +31466,9 @@ C
      *   CALL QUIT('Too many overlappins-nlines(ij).gt.mitj',
      *   nlines(ij),mitj)
          IF(NLINES(IJ).GT.NLIMAX) NLIMAX=NLINES(IJ)
+         IF(NLINES(IJ).GT.MULITJ) MULITJ=NLINES(IJ)
       END DO
-      WRITE(10,*) ' Max. number of line overlaps:       ',NLIMAX
-      WRITE(10,*) ' Total number of line overlaps:      ',NLITOT
+      MULITOT=NLITOT
 C
 C     Switches for ALI and explicit transitions
 C
@@ -33913,6 +34035,7 @@ C
             ITRLIN(NLINES(IJ),IJ)=IT
    50    CONTINUE
          IF(NLINES(IJ).GT.NLIMAX) NLIMAX=NLINES(IJ)
+         IF(NLINES(IJ).GT.MULITJ) MULITJ=NLINES(IJ)
    40 CONTINUE
       WRITE(6,611) NLIMAX
   611 FORMAT(' MAXIMUM NUMBER OF OVERLAPPING TRANSITIONS:  ',I3/)
@@ -34952,6 +35075,7 @@ C        this should not be compared to mfreql
      *               nf,mfreql)
          END IF
          IF(NF.GT.NFLX) NFLX=NF
+         IF(NF.GT.MUFLX) MUFLX=NF
          IF(KFR1(IT).GT.MFREQP)
      *      CALL QUIT('Too many cross-sections to store in PRFLIN 
      *      (KFR1(IT).GT.MFREQP)',
@@ -34986,17 +35110,8 @@ C
       END DO
       NPPX=NFREQ
 C
-C     first line of fort.10 in OS; the value is followed by the parameter it
-C     is checked against and that parameter's compiled-in limit, so a fort.10
-C     says on its own how much room the binary that wrote it had left.
-C     Note nfreql is bounded by MFREQP, not by MFREQL: MFREQL bounds nflx,
-C     the largest number of frequencies in any single line.
-      write(10,'(4A12)') "nfreq", "nfreqc", "nfreql", "nflx"
-      write(10,'(4A12)') "->mfreq", "->mfreqc", "->mfreqp", "->mfreql"
-      write(10,*) nfreq,nfreqc,nfreql,nflx
-      write(10,'(4I12)') mfreq,mfreqc,mfreqp,mfreql
-C     flush to encourage writing the output instantly
-      flush(UNIT=10)
+C     The array use these counts imply is reported by ARRUSE, once every
+C     setup routine has run.
       IF(NFREQ.GT.MFREQ) THEN
          WRITE(10,1000) NFREQ
  1000    FORMAT(' Number of frequencies:',I10)
@@ -35569,6 +35684,7 @@ C
             ITRLIN(NLINES(IJ),IJ)=IT
    50    CONTINUE
          IF(NLINES(IJ).GT.NLIMAX) NLIMAX=NLINES(IJ)
+         IF(NLINES(IJ).GT.MULITJ) MULITJ=NLINES(IJ)
    40 CONTINUE
       WRITE(6,603) NLIMAX
   603 FORMAT(' MAXIMUM NUMBER OF OVERLAPPING TRANSITIONS:  ',I3/)
@@ -36335,12 +36451,11 @@ C
                  END DO
               END IF
               IF(NFT.GT.NFTMX) NFTMX=NFT
+              IF(NFT.GT.MUFTMX) MUFTMX=NFT
            END DO
         END DO
   500 CONTINUE
-      WRITE(10,*) ' Max. number of freq. per transition:',NFTMX
-      WRITE(10,*) ' Number of iron line cross-sections: ',NFTT
-C     
+C
       CALL IJALI2   
 C     
       RETURN
