@@ -29628,7 +29628,7 @@ c         effective one, n* = Z*sqrt(E_H/E_ion).  For a hydrogenic ion
 c         that is the principal quantum number itself; for a level with
 c         a quantum defect, and for a merged level whose NQUANT is only
 c         a placeholder, it is the only meaningful measure.  A level at
-c         or above the ionization limit (ENION <= 0, i.e. autoionizing,
+c         or above the ionisation limit (ENION <= 0, i.e. autoionising,
 c         converging to an excited parent) is left undissolved: its
 c         dissolution is not that of the ground-state series.
 c
