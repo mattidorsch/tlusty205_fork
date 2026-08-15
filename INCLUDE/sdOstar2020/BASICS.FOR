@@ -16,7 +16,7 @@ C
      *           MMU    =    3, ! max.num. of angle points
      *           MFIT   =  220, ! max.num. of fit points (OP b-f c.s)
      *           MITJ   =  320, ! max.num. of overlapping transitions
-     *           MMCDW  =   19, ! max.num. of levels with pseudocont.
+     *           MMCDW  =  100, ! max.num. of levels with pseudocont.
      *           MMER   =    2, ! max.num. of merged levels
      *           MVOIGT =  180, ! max.num. of lines with Voigt profile
      *           MZZ    =   10, ! maximum charge for occup.prob. ions

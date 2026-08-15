@@ -536,15 +536,6 @@ C
       if(ntrans.gt.mtrmax)
      * call quit(' ntrans.gt.mtrmax; raise MITRK to 4 in BASICS.FOR',
      *             ntrans,mtrmax)
-      nncdw=0
-      do ibft=1,ntranc
-          itr=itrbf(ibft)
-          icdw=mcdw(itr)
-          if(icdw.ge.1) nncdw=nncdw+1
-      end do
-      if(nncdw.gt.mmcdw) call quit('Too many pseudo-continua',
-     *                             nncdw, mmcdw)
-      mumcdw=nncdw
 c
 C  -----------------------------------------------------------
 C     read the input model
@@ -580,6 +571,20 @@ C
       IF(NFREAD.GT.0 .AND. ISPODF.EQ.0) CALL INIFRC(1)
 C
       CALL TRAINI
+C
+C     TRAINI is what assigns MCDW, so the pseudo-continua can only be
+C     counted here; done any earlier the count is always zero and the
+C     bound below never bites, leaving DWF1 to be written past its end.
+C
+      nncdw=0
+      do ibft=1,ntranc
+          itr=itrbf(ibft)
+          icdw=mcdw(itr)
+          if(icdw.ge.1) nncdw=nncdw+1
+      end do
+      if(nncdw.gt.mmcdw) call quit('Too many pseudo-continua',
+     *                             nncdw, mmcdw)
+      mumcdw=nncdw
 C
 C  -----------------------------------------------------------
 C     sorting frequencies & new weights
@@ -4568,8 +4573,7 @@ C         END IF
          DO ID=1,ND
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -4601,8 +4605,7 @@ C
             IF(SG.GT.0.) THEN
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -9863,7 +9866,16 @@ C
          NFIT=IB-100
          X = LOG10(FR/FR0(ITR))
          SIGM=0.
-         IF(X.GE.XTOP(1,IC)) THEN
+C
+C        Below the first tabulated point the fit is continued only when
+C        an extrapolated cross section is what was asked for (MODE>0),
+C        i.e. for a pseudo-continuum; YLINTP extrapolates on the slope of
+C        the first interval.  These tables start a fraction of a percent
+C        below the threshold, so without this the dissolved fraction has
+C        almost nothing to multiply and a MODE=5 continuum on any ion
+C        with Opacity Project data is very nearly dead.
+C
+         IF(X.GE.XTOP(1,IC) .OR. MODE.GT.0) THEN
            DO IFIT = 1,NFIT
               XFIT(IFIT) = XTOP(IFIT,IC)
               SFIT(IFIT) = CTOP(IFIT,IC)
@@ -18569,8 +18581,7 @@ C
             IF(IFWOP(I).GE.0) THEN
               IF(ICDW.GE.1) THEN
                  IZZ=IZ(IEL(I))
-                 FR0G=ENION(NFIRST(IEL(II)))/H
-                 CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+                 CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                  SG=SG*DW1
               END IF
             ELSE
@@ -19338,8 +19349,7 @@ C
          DO ID=1,ND
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -19380,8 +19390,7 @@ C
           if(sg.gt.0.) then
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -29611,15 +29620,25 @@ C
         
         else if(ifwop(ii).eq.1) then
           ie=iel(ii)
-          nq=nquant(ii)
-          if(iz(ie).eq.1) then
-            wop(ii,id)=wnhint(nq,id)
-          else
-            z=iz(ie)
-            xn=nq
+          z=iz(ie)
+c
+c         The occupation probability depends on the level only through
+c         its binding energy, so the quantum number handed to WN is the
+c         effective one, n* = Z*sqrt(E_H/E_ion).  For a hydrogenic ion
+c         that is the principal quantum number itself; for a level with
+c         a quantum defect, and for a merged level whose NQUANT is only
+c         a placeholder, it is the only meaningful measure.  A level at
+c         or above the ionization limit (ENION <= 0, i.e. autoionizing,
+c         converging to an excited parent) is left undissolved: its
+c         dissolution is not that of the ground-state series.
+c
+          if(enion(ii).gt.0.) then
+            xn=z*sqrt(eh/enion(ii))
             wop(ii,id)=wn(xn,a,ane,z)
+          else
+            wop(ii,id)=un
           end if
-        
+
         end if
       
         if(ifwop(ii).gt.1.and.lte) wop(ii,id)=un
@@ -29697,7 +29716,7 @@ C
       PARAMETER (FRH=3.28805D15,SQFRH=5.734152D7)
       DIMENSION FR(N),DW(N)
 C
-      cb=cb0*berfc
+      cb=cb0*bergfc
 c
       IF(MODE.EQ.0) THEN
        DO 20 IJ=1,N
@@ -31805,7 +31824,7 @@ C
 C ********************************************************************
 C
 C
-      SUBROUTINE DWNFR2(FR,FR0,FR0G,ID,IZZ,DW1)
+      SUBROUTINE DWNFR2(FR,FR0,ID,IZZ,DW1)
 C     ====================================
 C
 C     dissolved fraction for frequency FR
@@ -31813,19 +31832,23 @@ C
       INCLUDE 'INCLUDE/IMPLIC.FOR'
       INCLUDE 'INCLUDE/BASICS.FOR'
       INCLUDE 'INCLUDE/MODELQ.FOR'
-      PARAMETER (TKN=3.01,CKN=5.33333333,CB0=8.59d14,
-     *           CB1=3.437977d15,CKN1=1.1666667,
-     *           FR0HE14l=8.759d14,FR0HE14h=8.760d14)
+      PARAMETER (TKN=3.01,CKN=5.33333333,
+     *           CB1=3.437977d15,CKN1=1.1666667)
       PARAMETER (SQFRH=5.734152D7)
 C
-C      cb=cb0*bergfc
-C     BERGFC = 2 or 1 Bergeron empirical factor (obsolete)
-C     SQFRH = SQRT(frequceny of EionH)
+C     SQFRH = SQRT(ionization frequency of hydrogen).  The Bergeron
+C     factor BERGFC does not enter here; it belongs to the original
+C     Hummer-Mihalas occupation probabilities and is obsolete.
       IF(FR.LT.FR0) THEN
-C        FR0-FR distance from ionization
-C        -> inf for FR -> FR0, -> IZZ for FR -> 0
-C         XN=SQFRH*IZZ/SQRT(FR0-FR)
-         XN=SQRT(FR0G)/SQRT(FR0-FR)
+C        FR0-FR is the binding energy of the state the photon reaches,
+C        so XN is that state's effective quantum number, n* = Z*sqrt(nu_H/dE):
+C        -> inf as FR -> FR0, -> IZZ as FR -> 0.
+C        It enters only through K_n below.  Scaling instead by the ground
+C        state, XN=SQRT(FR0G)/SQRT(FR0-FR), is the same thing for H I and
+C        He II but not for any ion with a quantum defect, where it misses
+C        n* by sqrt(Z^2*nu_H/nu_gs) at every frequency -- a factor 2-3 too
+C        little dissolution for C IV or Si IV, and too much for He I.
+         XN=SQFRH*IZZ/SQRT(FR0-FR)
          if(xn.le.tkn) then
             xkn=un
          else
@@ -31837,25 +31860,18 @@ C           as in Hummer + Mihalas 1988 (factor is approx 1)
 C         BETA=CB*Z3(IZZ)*XKN/(XN*XN*XN*XN)*ELEC23(ID)
 C        this reproduces hydrogenic perfectly (in atomic units)
          BETA=CB1*XKN*ELEC23(ID)*(FR0-FR)*H*(FR0-FR)*H/(EH*EH*IZZ*4.)
-C        factor C = Nion / Ne = 1 in tlusty 205
-C        ELEC(ID)=electron density in cm-3
-C        DENS(ID)=ion density in g cm-3
-C        DENS(ID)/WMM(ID)=ion density in cm-3
+C        BETA is a field in units of the Holtsmark normal field, which is
+C        set by the CHARGED PERTURBERS, not by the electrons: stock tlusty
+C        normalises to Ne, i.e. it assumes a mean perturber charge of one.
+C        Restoring the perturber density lowers BETA by Zbar^(1/3), with
+C        Zbar = Ne/Nion; the correction is 1 in hydrogen and reaches 2^(1/3)
+C        in a fully ionized helium plasma.  DENS/WMM counts every nucleus,
+C        so in partly neutral layers it overstates the perturber density.
          BETA=BETA*((DENS(ID)/WMM(ID))/ELEC(ID))**0.3333333
          BETA3=BETA*BETA*BETA
          BETA32=SQRT(BETA3)
          F=(DWC1(IZZ,ID)*BETA3)/(UN+DWC2(ID)*BETA32)
          DW1=UN-F/(UN+F)
-C         IF(FR0.GT.FR0HE14l.AND.FR0.LT.FR0HE14h) THEN
-C            IF (ID.EQ.50) THEN
-C               print '(I3.2,I2.1,F10.4,F10.4,F10.4,ES13.6,ES14.6,
-C     &                 ES13.6,ES13.6,ES14.6,ES14.6,ES14.6,ES14.6)',
-C     &                 ID,IZZ,CAS/FR0,CAS/FR,XN,XKN,BETA,DW1,
-C     &                 ELEC(ID),DENS(ID)/WMM(ID),
-C     &                 (DENS(ID)/WMM(ID))/ELEC(ID),
-C     &                 SQRT(FR0G),SQFRH*IZZ
-C            END IF
-C         END IF
       ELSE
          DW1=UN
       END IF
@@ -33821,8 +33837,7 @@ C
             IF(SG.LE.0.) GO TO 30
             IF(MCDW(ITR).GT.0) THEN
                IZZ=IZ(IEL(II))
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SG=SG*DW1
             END IF
@@ -36977,8 +36992,7 @@ C
          DO ID=1,ND
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -37014,8 +37028,7 @@ C
             IF(SG.GT.0.) THEN
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -43262,8 +43275,7 @@ C
          DO ID=1,ND
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
@@ -43297,8 +43309,7 @@ C
             IF(SG.GT.0.) THEN
             SGD=SG
             IF(MCDW(ITR).GT.0) THEN
-               FR0G=ENION(NFIRST(IEL(II)))/H
-               CALL DWNFR2(FR,FR0(ITR),FR0G,ID,IZZ,DW1)
+               CALL DWNFR2(FR,FR0(ITR),ID,IZZ,DW1)
                DWF1(MCDW(ITR),ID)=DW1
                SGD=SG*DW1
             END IF
