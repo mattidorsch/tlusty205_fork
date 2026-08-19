@@ -17,6 +17,7 @@ https://arxiv.org/abs/1706.01937
     make O70_d4_vhigh    # t205_O70_d4_vhigh
     make O70_d4_low      # t205_O70_d4_low
     make O70_d0.75_low   # t205_O70_d0.75_low
+    make B70_d4_low      # t205_B70_d4_low
 
 Variant targets take BASICS.FOR and ODFPAR.FOR from `INCLUDE/<variant>/` and the
 remaining includes from `INCLUDE/`, compiling under `build/<variant>/`.
@@ -32,11 +33,19 @@ how many ion levels fit (low, mid, high, vhigh).
 | O70_d4_vhigh | 70 | 4 | vhigh | 2400 | 332432 | yes, large line lists | 4.3 GB |
 | O70_d4_low | 70 | 4 | low | 600 | 140000 | no | 0.9 GB |
 | O70_d0.75_low | 70 | 0.75 | low | 150 | 190000 | no | 0.9 GB |
+| B70_d4_low | 70 | 4 | low | 600 | 140000 | no | 0.8 GB |
 
-The two `low` variants set MKULEV, MLINE and MCFE to 2, so neither can compute
+The three `low` variants set MKULEV, MLINE and MCFE to 2, so none can compute
 iron-group opacity distribution functions at all. `O70_d4_low` takes H, He and a
 few CNO/Si ions; `O70_d0.75_low` is for H + He alone, at the finer DDNU those
 models are usually run with.
+
+`B70_d4_low` shares MLEVEL and MFREQ with `O70_d4_low` and differs in the four
+bounds a cooler model with a full CNO and silicon set runs into: MFREQC 3400 and
+MFREQP 400000, since more ions of low charge put more edges in the continuum,
+and MLVEXP 200 with MTOT 200, since few of those levels are linearised. The
+smaller MTOT is where the memory goes, the linearisation matrices being
+MTOT by MTOT by MDEPTH.
 
 A model over any bound stops in QUIT with the parameter named in fort.10. The
 first line of fort.10 reports nfreq, nfreqc, nfreql and nflx against MFREQ,

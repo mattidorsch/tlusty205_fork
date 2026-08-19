@@ -21,7 +21,8 @@ small:
 # Named <type><ND>_d<DDNU>_<levels>: the spectral type it was dimensioned for,
 # the depth points, the DDNU its frequency bounds assume, and how many ion
 # levels fit (low, mid, high, vhigh).
-VARIANTS = sdOstar2020 sdO_full O70_d4_vhigh O70_d4_low O70_d0.75_low
+VARIANTS = sdOstar2020 sdO_full O70_d4_vhigh O70_d4_low O70_d0.75_low \
+           B70_d4_low sdO_full_hot
 
 $(VARIANTS): %: tlusty205_fork.f90 INCLUDE/%/BASICS.FOR INCLUDE/%/ODFPAR.FOR
 	mkdir -p build/$@/INCLUDE
