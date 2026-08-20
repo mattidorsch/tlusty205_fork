@@ -14,10 +14,18 @@ https://arxiv.org/abs/1706.01937
     make small           # same, without -mcmodel=medium
     make sdOstar2020     # t205_sdOstar2020
     make sdO_full        # t205_sdO_full
+    make sdO_full_hot    # t205_sdO_full_hot
     make O70_d4_vhigh    # t205_O70_d4_vhigh
     make O70_d4_low      # t205_O70_d4_low
     make O70_d0.75_low   # t205_O70_d0.75_low
     make B70_d4_low      # t205_B70_d4_low
+
+Only the variants whose static data exceeds the 2 GB the small code model
+can address are built with `-mcmodel=medium`; the three `low` variants stay under
+1 GB and are built without it. The split is the `BIG_VARIANTS` list in the
+Makefile, and `make check-mcmodel` recompiles every variant in the small code
+model and reports which ones fail to link, i.e. what that list should be after
+a change to any BASICS.FOR.
 
 Variant targets take BASICS.FOR and ODFPAR.FOR from `INCLUDE/<variant>/` and the
 remaining includes from `INCLUDE/`, compiling under `build/<variant>/`.
