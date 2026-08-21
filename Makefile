@@ -29,12 +29,12 @@ small:
 # the depth points, the DDNU its frequency bounds assume, and how many ion
 # levels fit (low, mid, high, vhigh).
 VARIANTS = sdOstar2020 sdO_full O70_d4_vhigh O70_d4_low O70_d0.75_low \
-           B70_d4_low sdO_full_hot
+           B70_d4_low sdO_full_hot O70_d8_vhigh
 
 # Variants that overflow the small code model and therefore need $(MCMODEL);
 # the others link without it.  Re-check with "make check-mcmodel" after
 # changing any BASICS.FOR.
-BIG_VARIANTS = sdOstar2020 sdO_full sdO_full_hot O70_d4_vhigh
+BIG_VARIANTS = sdOstar2020 sdO_full sdO_full_hot O70_d4_vhigh O70_d8_vhigh
 
 $(BIG_VARIANTS): MCMODEL_VAR = $(MCMODEL)
 
