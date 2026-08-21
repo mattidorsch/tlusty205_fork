@@ -43105,8 +43105,26 @@ C
       parameter (pi4=4.*3.14159265d0)
       DIMENSION CLHT1(MDEPTH),CLHT2(MDEPTH),CLHT3(MDEPTH)
       DIMENSION CLRAT(MION,MDEPTH),HTRAT(MION,MDEPTH)
+      DIMENSION ICFRQ(MFREQ)
       COMMON/COOLCO/ABSOTI(MION,MDEPTH),EMISTI(MION,MDEPTH),
      *               ABSOC1(MDEPTH),EMISC1(MDEPTH)
+C
+C     Continuum frequencies are a SUBSET of the full grid, addressed as
+C     FREQ(IFREQB(IC)) for IC=1,NFREQC - the same idiom used everywhere
+C     else in the code.  They are spread over the whole range, and INIFRS
+C     forces IFREQB(NFREQC)=NFREQ.  Testing IJ.LE.NFREQC instead compares
+C     a full-grid index against a continuum-grid count, which selects the
+C     first NFREQC points of the full grid: the highest frequencies only,
+C     and a small fraction of the spectrum.  ICFRQ inverts IFREQB so the
+C     IPOPAC output covers the range it is documented to cover.
+C
+      DO IJ=1,NFREQ
+         ICFRQ(IJ)=0
+      END DO
+      DO IC=1,NFREQC
+         IF(IFREQB(IC).GE.1 .AND. IFREQB(IC).LE.NFREQ)
+     *      ICFRQ(IFREQB(IC))=IC
+      END DO
 C
       DO ID=1,ND
          DO ION=1,NION
@@ -43135,13 +43153,14 @@ c            EM=EMIS1(ID)+ELSCAT(ID)*RAD1(ID)
          END DO
 C
       if(ipopac.eq.1) then
-         if(ij.le.nfreqc) then
-            write(85,685) ij,freq(ij),(absoc1(id)/dens(id),id=1,nd)
+         if(icfrq(ij).gt.0) then
+            write(85,685) icfrq(ij),freq(ij),
+     *                    (absoc1(id)/dens(id),id=1,nd)
          end if
       end if
       if(ipopac.eq.2) then
-         if(ij.le.nfreqc) then
-            write(87,686) ij,freq(ij)
+         if(icfrq(ij).gt.0) then
+            write(87,686) icfrq(ij),freq(ij)
             taud=abso1(1)*dedm1
             do id=1,nd
                if(id.gt.1) taud=taud+deldmz(id-1)*
