@@ -5070,7 +5070,8 @@ C
        END DO
       END DO
 c     do ii=1,nlevel
-c         write(89,699) ii,iter,iatm(ii),iiexp(ii),ipzert(ii),popma(ii)
+c         write(89,699) ii,iter,iatm(ii),iiexp(ii),ipzert(ii),pop
+c         NOTE: unit 89 now carries the IPOPAC=2 output; pick another unitma(ii)
 c     end do
 c 699 format(5i5,1pe12.3)
 c
@@ -43158,14 +43159,17 @@ C
      *                    (absoc1(id)/dens(id),id=1,nd)
          end if
       end if
+C     Unit 89, not 87: ICOOLP>=2 writes the per ion cooling table to 87, so
+C     sharing it meant IPOPAC=2 and ICOOLP>=2 could not be asked for together
+C     and one run could not produce the whole diagnostic set.
       if(ipopac.eq.2) then
          if(icfrq(ij).gt.0) then
-            write(87,686) icfrq(ij),freq(ij)
+            write(89,686) icfrq(ij),freq(ij)
             taud=abso1(1)*dedm1
             do id=1,nd
                if(id.gt.1) taud=taud+deldmz(id-1)*
      *                     (absot(id-1)+absot(id))
-               write(87,687) taud,abso1(id)-scat1(id),scat1(id),
+               write(89,687) taud,abso1(id)-scat1(id),scat1(id),
      *                       emis1(id),rad1(id)
             end do
          end if
