@@ -43109,6 +43109,9 @@ C
       DIMENSION ICFRQ(MFREQ)
       COMMON/COOLCO/ABSOTI(MION,MDEPTH),EMISTI(MION,MDEPTH),
      *               ABSOC1(MDEPTH),EMISC1(MDEPTH)
+      COMMON/OPSPLT/OPXBF(MDEPTH),OPXFF(MDEPTH),OPXADD(MDEPTH),
+     *              OPXBB(MDEPTH),EMXBF(MDEPTH),EMXFF(MDEPTH),
+     *              EMXADD(MDEPTH),EMXBB(MDEPTH)
 C
 C     Continuum frequencies are a SUBSET of the full grid, addressed as
 C     FREQ(IFREQB(IC)) for IC=1,NFREQC - the same idiom used everywhere
@@ -43170,13 +43173,14 @@ C     and one run could not produce the whole diagnostic set.
                if(id.gt.1) taud=taud+deldmz(id-1)*
      *                     (absot(id-1)+absot(id))
                write(89,687) taud,abso1(id)-scat1(id),scat1(id),
-     *                       emis1(id),rad1(id)
+     *                       emis1(id),rad1(id),
+     *                       opxbf(id),opxff(id),opxadd(id),opxbb(id)
             end do
          end if
       end if
   685 format(i5,1pe15.7/(1p8e10.3))
   686 format(i5,1pe15.7)
-  687 format(1p8e10.3)
+  687 format(1p9e10.3)
 C
   500 CONTINUE
 C
@@ -43251,6 +43255,15 @@ C
       INCLUDE 'INCLUDE/ALIPAR.FOR'
       COMMON/COOLCO/ABSOTI(MION,MDEPTH),EMISTI(MION,MDEPTH),
      *               ABSOC1(MDEPTH),EMISC1(MDEPTH)
+C
+C     Absorption split by process, accumulated alongside ABSO1 so the four
+C     always sum to it.  Electron scattering is already separate in SCAT1.
+C     OPXBB is only filled when ICOOLP is non-zero, because the line section
+C     below is skipped otherwise.  The names carry an X to keep clear of
+C     ABSFF, which MODELQ.FOR already defines for something else.
+      COMMON/OPSPLT/OPXBF(MDEPTH),OPXFF(MDEPTH),OPXADD(MDEPTH),
+     *              OPXBB(MDEPTH),EMXBF(MDEPTH),EMXFF(MDEPTH),
+     *              EMXADD(MDEPTH),EMXBB(MDEPTH)
       PARAMETER (C14=2.99793D14, CFF1=1.3727D-25)
 C
 C     initialize
@@ -43267,6 +43280,14 @@ C
          SCAT1(ID)=ELSCAT(ID)
          ABSOC1(ID)=ABSO1(ID)
          EMISC1(ID)=0.
+         OPXBF(ID)=0.
+         OPXFF(ID)=0.
+         OPXADD(ID)=0.
+         OPXBB(ID)=0.
+         EMXBF(ID)=0.
+         EMXFF(ID)=0.
+         EMXADD(ID)=0.
+         EMXBB(ID)=0.
        DO ION=1,NION
           ABSOTI(ION,ID)=0.
           EMISTI(ION,ID)=0.
@@ -43309,7 +43330,9 @@ C
             END IF
             EMISBF=SGD*EMTRA(ITR,ID)
             ABSO1(ID)=ABSO1(ID)+SGD*ABTRA(ITR,ID)
+            OPXBF(ID)=OPXBF(ID)+SGD*ABTRA(ITR,ID)
             EMIS1(ID)=EMIS1(ID)+EMISBF
+            EMXBF(ID)=EMXBF(ID)+EMISBF
           ABSOTI(IEL(II),ID)=ABSOTI(IEL(II),ID)+SGD*ABTRA(ITR,ID)
           EMISTI(IEL(II),ID)=EMISTI(IEL(II),ID)+EMISBF
        END DO
@@ -43343,7 +43366,9 @@ C
             END IF
             EMISBF=SGD*EMTRA(ITR,ID)
             ABSO1(ID)=ABSO1(ID)+SGD*ABTRA(ITR,ID)
+            OPXBF(ID)=OPXBF(ID)+SGD*ABTRA(ITR,ID)
             EMIS1(ID)=EMIS1(ID)+EMISBF
+            EMXBF(ID)=EMXBF(ID)+EMISBF
           ABSOTI(IEL(II),ID)=ABSOTI(IEL(II),ID)+SGD*ABTRA(ITR,ID)
           EMISTI(IEL(II),ID)=EMISTI(IEL(II),ID)+EMISBF
           END IF
@@ -43366,7 +43391,9 @@ C
                IF(FR.LT.FF(ION)) SF2=UN/XKF(ID)
                ABSOFF=SF1*SF2
                ABSO1(ID)=ABSO1(ID)+ABSOFF
+               OPXFF(ID)=OPXFF(ID)+ABSOFF
                EMIS1(ID)=EMIS1(ID)+ABSOFF
+               EMXFF(ID)=EMXFF(ID)+ABSOFF
              ABSOTI(ION,ID)=ABSOTI(ION,ID)+ABSOFF
              EMISTI(ION,ID)=EMISTI(ION,ID)+ABSOFF
             END DO
@@ -43382,7 +43409,9 @@ C
                SF2=SF2-UN+GFREE1(ID,X)
                ABSOFF=SF1*SF2
                ABSO1(ID)=ABSO1(ID)+ABSOFF
+               OPXFF(ID)=OPXFF(ID)+ABSOFF
                EMIS1(ID)=EMIS1(ID)+ABSOFF
+               EMXFF(ID)=EMXFF(ID)+ABSOFF
              ABSOTI(ION,ID)=ABSOTI(ION,ID)+ABSOFF
              EMISTI(ION,ID)=EMISTI(ION,ID)+ABSOFF
             END DO
@@ -43393,7 +43422,9 @@ C
             DO ID=1,ND
                ABSOFF=(CFF1+CFFT(ID)*FRINV)*CFFN(ID)*FRINV
                ABSO1(ID)=ABSO1(ID)+ABSOFF
+               OPXFF(ID)=OPXFF(ID)+ABSOFF
                EMIS1(ID)=EMIS1(ID)+ABSOFF
+               EMXFF(ID)=EMXFF(ID)+ABSOFF
              ABSOTI(ION,ID)=ABSOTI(ION,ID)+ABSOFF
              EMISTI(ION,ID)=EMISTI(ION,ID)+ABSOFF
             END DO
@@ -43405,7 +43436,9 @@ C
                ABSOFF=FFCROS(ION,IT,TEMP(ID),FR)*
      *                POPUL(NNEXT(ION),ID)*ELEC(ID)
                ABSO1(ID)=ABSO1(ID)+ABSOFF
+               OPXFF(ID)=OPXFF(ID)+ABSOFF
                EMIS1(ID)=EMIS1(ID)+ABSOFF
+               EMXFF(ID)=EMXFF(ID)+ABSOFF
              ABSOTI(ION,ID)=ABSOTI(ION,ID)+ABSOFF
              EMISTI(ION,ID)=EMISTI(ION,ID)+ABSOFF
             END DO
@@ -43419,7 +43452,9 @@ C
          DO ID=1,ND
             CALL OPADD(0,ICALL,IJ,ID)
             ABSO1(ID)=ABSO1(ID)+ABAD
+            OPXADD(ID)=OPXADD(ID)+ABAD
             EMIS1(ID)=EMIS1(ID)+EMAD
+            EMXADD(ID)=EMXADD(ID)+EMAD
             SCAT1(ID)=SCAT1(ID)+SCAD
           ABSOTI(IELH,ID)=ABSOTI(IELH,ID)+ABAD
           EMISTI(IELH,ID)=EMISTI(IELH,ID)+EMAD
@@ -43444,7 +43479,9 @@ C
          DO 50 ID=1,ND
             SG=PRFLIN(ID,IJ)
             ABSO1(ID)=ABSO1(ID)+SG*ABTRA(ITR,ID)
+            OPXBB(ID)=OPXBB(ID)+SG*ABTRA(ITR,ID)
             EMIS1(ID)=EMIS1(ID)+SG*EMTRA(ITR,ID)
+            EMXBB(ID)=EMXBB(ID)+SG*EMTRA(ITR,ID)
           ABSOTI(ION,ID)=ABSOTI(ION,ID)+SG*ABTRA(ITR,ID)
           EMISTI(ION,ID)=EMISTI(ION,ID)+SG*EMTRA(ITR,ID)
    50    CONTINUE
@@ -43470,7 +43507,9 @@ C
          DO 80 ID=1,ND
             SG=A1*PRFLIN(ID,IJ1)+A2*PRFLIN(ID,IJ0)
             ABSO1(ID)=ABSO1(ID)+SG*ABTRA(ITR,ID)
+            OPXBB(ID)=OPXBB(ID)+SG*ABTRA(ITR,ID)
             EMIS1(ID)=EMIS1(ID)+SG*EMTRA(ITR,ID)
+            EMXBB(ID)=EMXBB(ID)+SG*EMTRA(ITR,ID)
           ABSOTI(ION,ID)=ABSOTI(ION,ID)+SG*ABTRA(ITR,ID)
           EMISTI(ION,ID)=EMISTI(ION,ID)+SG*EMTRA(ITR,ID)
    80    CONTINUE
@@ -43490,7 +43529,9 @@ C
         DO ID=1,ND
             SG=PRFLIN(ID,KJ)
             ABSO1(ID)=ABSO1(ID)+SG*ABTRA(ITR,ID)
+            OPXBB(ID)=OPXBB(ID)+SG*ABTRA(ITR,ID)
             EMIS1(ID)=EMIS1(ID)+SG*EMTRA(ITR,ID)
+            EMXBB(ID)=EMXBB(ID)+SG*EMTRA(ITR,ID)
           ABSOTI(ION,ID)=ABSOTI(ION,ID)+SG*ABTRA(ITR,ID)
           EMISTI(ION,ID)=EMISTI(ION,ID)+SG*EMTRA(ITR,ID)
         END DO
@@ -43499,7 +43540,9 @@ C
           KJD=JIDI(ID)
       SG=EXP(XJID(ID)*SIGFE(KJD,KJ)+(UN-XJID(ID))*SIGFE(KJD+1,KJ))
             ABSO1(ID)=ABSO1(ID)+SG*ABTRA(ITR,ID)
+            OPXBB(ID)=OPXBB(ID)+SG*ABTRA(ITR,ID)
             EMIS1(ID)=EMIS1(ID)+SG*EMTRA(ITR,ID)
+            EMXBB(ID)=EMXBB(ID)+SG*EMTRA(ITR,ID)
           ABSOTI(ION,ID)=ABSOTI(ION,ID)+SG*ABTRA(ITR,ID)
           EMISTI(ION,ID)=EMISTI(ION,ID)+SG*EMTRA(ITR,ID)
         END DO
@@ -43516,6 +43559,12 @@ C
       DO ID=1,ND
          ABSO1(ID)=ABSO1(ID)-EMIS1(ID)*XKF(ID)
          ABSOC1(ID)=ABSOC1(ID)-EMISC1(ID)*XKF(ID)
+C        the same stimulated emission correction on every component, so they
+C        still sum to ABSO1 after it has been applied
+         OPXBF(ID)=OPXBF(ID)-EMXBF(ID)*XKF(ID)
+         OPXFF(ID)=OPXFF(ID)-EMXFF(ID)*XKF(ID)
+         OPXADD(ID)=OPXADD(ID)-EMXADD(ID)*XKF(ID)
+         OPXBB(ID)=OPXBB(ID)-EMXBB(ID)*XKF(ID)
        DO ION=1,NION
          ABSOTI(ION,ID)=ABSOTI(ION,ID)-EMISTI(ION,ID)*XKF(ID)
        END DO
